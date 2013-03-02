@@ -132,12 +132,10 @@ table {
 .header {
 }
 .logo {
-	background: url("img/logo.png") 0 0 no-repeat;
-	text-indent: -9999px;
+
 }
-.logo a {
+.logo__link {
 	display: block;
-	height: 100%;
 }
 
 
