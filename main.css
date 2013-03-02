@@ -1,0 +1,273 @@
+/*
+Author:     Aleks Hudochenkov
+Release:    3.10.2012
+-----------------------------------------------------------------------------*/
+
+/* Reset
+-----------------------------------------------------------------------------*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ul, ol {
+	list-style: none;
+}
+
+/* Common
+-----------------------------------------------------------------------------*/
+
+html {
+	overflow-y: scroll;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+body, select, input, textarea, button {
+	color: #000;
+	font-family: sans-serif;
+}
+body {
+	font: 13px/18px sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+a,
+a:active,
+a:visited {
+	color: #607890;
+	text-decoration: underline;
+}
+	a:hover {
+		color: #036;
+	}
+	a:hover,
+	a:active {
+		outline: 0;
+	}
+input, select, textarea, button {
+	margin: 0;
+	font-size: 100%;
+}
+	input, select {
+		vertical-align: middle;
+	}
+	input, button {
+		line-height: normal;
+	}
+	input[type="radio"] {
+		vertical-align: text-bottom;
+	}
+	input[type="checkbox"] {
+		vertical-align: bottom;
+	}
+	button,
+	input[type="submit"] {
+		cursor: pointer;
+		-webkit-appearance: button;
+	}
+	button::-moz-focus-inner,
+	input::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+	textarea {
+		overflow: auto;
+		vertical-align: top;
+		resize: vertical;
+	}
+	.text-input,
+	textarea {
+	}
+img {
+	vertical-align: top;
+}
+strong, b {
+	font-weight: bold;
+}
+em, i {
+	font-style: italic;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+	th {
+		font-weight: bold;
+	}
+	td {
+		vertical-align: top;
+	}
+
+/* Wrapper
+-----------------------------------------------------------------------------*/
+
+.wrapper {
+	margin: auto;
+	width: 960px;
+}
+.inner {
+	margin: auto;
+}
+
+/* Header
+-----------------------------------------------------------------------------*/
+
+.header {
+}
+.logo {
+	background: url("img/logo.png") 0 0 no-repeat;
+	text-indent: -9999px;
+}
+.logo a {
+	display: block;
+	height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Middle
+-----------------------------------------------------------------------------*/
+
+.middle {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Main
+-----------------------------------------------------------------------------*/
+
+.main {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Aside
+-----------------------------------------------------------------------------*/
+
+.aside {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer
+-----------------------------------------------------------------------------*/
+
+.footer {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Blocks
+-----------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
