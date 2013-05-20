@@ -84,6 +84,8 @@ input, select, textarea, button {
 	}
 	button::-moz-focus-inner,
 	input::-moz-focus-inner {
+		margin-top: -2px;
+		margin-bottom: -2px;
 		padding: 0;
 		border: 0;
 	}
