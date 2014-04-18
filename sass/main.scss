@@ -3,32 +3,9 @@ Author:     Aleks Hudochenkov
 Release:    03.03.2013
 -----------------------------------------------------------------------------*/
 
-/* Reset
------------------------------------------------------------------------------*/
-
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, menu, nav, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-article, aside, details, figcaption, figure,
-footer, header, menu, nav, section {
-	display: block;
-}
-ul, ol {
-	list-style: none;
-}
+@import "reset";
+@import "vars";
+@import "mixins";
 
 /* Initial
 -----------------------------------------------------------------------------*/
@@ -48,19 +25,21 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 }
-a,
-a:active,
-a:visited {
-	color: #607890;
-	text-decoration: underline;
-}
-	a:hover {
+a {
+	&,
+	&:active,
+	&:visited {
+		color: #607890;
+		text-decoration: underline;
+	}
+	&:hover {
 		color: #036;
 	}
-	a:hover,
-	a:active {
+	&:hover,
+	&:active {
 		outline: 0;
 	}
+}
 input, select, textarea, button {
 	margin: 0;
 	font-size: 100%;
@@ -135,9 +114,9 @@ table {
 }
 .logo {
 
-}
-.logo__link {
-	display: block;
+	&__link {
+		display: block;
+	}
 }
 
 
