@@ -74,10 +74,38 @@ module.exports = function(grunt) {
 			}
 		},
 
+		sprite: {
+			buildretina: {
+				'src': ['img/sprite/*@2x.png'],
+				'destImg': 'img/sprite@2x.png',
+				'destCSS': 'sass/_sprite.scss',
+				'algorithm': 'binary-tree',
+				'padding': 20,
+				'engine': 'auto'
+			},
+			build: {
+				'src': ['img/sprite/*.png', '!<%= sprite.buildretina.src %>'],
+				'destImg': 'img/sprite.png',
+				'padding': 10,
+				'cssTemplate': '../spritesmith-retina-mixins.template.mustache',
+
+				'cssVarMap': function (sprite) {
+					sprite.image = sprite.image.replace(".png", "");
+				},
+				'algorithm': '<%= sprite.buildretina.algorithm %>',
+				'destCSS': '<%= sprite.buildretina.destCSS %>',
+				'engine': '<%= sprite.buildretina.engine %>'
+			}
+		},
+
 		watch: {
 			sass: {
 				files: ['sass/*.scss'],
 				tasks: ['sass:dev', 'autoprefixer:dev'],
+			},
+			sprites: {
+				files: ['img/sprite/*.png'],
+				tasks: ['sprite'],
 			},
 			livereload: {
 				// Here we watch the files the sass task will compile to
@@ -93,6 +121,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['sass:dev', 'autoprefixer:dev', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'watch']);
-	grunt.registerTask('build', ['sass:dist', 'autoprefixer:dist', 'usebanner']);
+	grunt.registerTask('build', ['sprite', 'sass:dist', 'autoprefixer:dist', 'usebanner']);
 
 };
