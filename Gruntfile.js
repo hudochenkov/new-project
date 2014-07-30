@@ -106,21 +106,37 @@ module.exports = function(grunt) {
 			sprites: {
 				files: ['img/sprite/*.png'],
 				tasks: ['sprite'],
-			},
-			livereload: {
-				// Here we watch the files the sass task will compile to
-				// These files are sent to the live reload server after sass compiles to them
-				files: ['main.css'],
-				options: { livereload: true },
 			}
 		}
 
 	});
 
+	// Start BrowserSync via the API
+	// using this code because of bug related to autoprefixer https://github.com/shakyShane/grunt-browser-sync/issues/50
+	var bs;
+	grunt.registerTask("bs-start", function () {
+		var browserSync = require("browser-sync");
+		bs = browserSync.init([
+			'main.css',
+			'*.html',
+			'js/*.js',
+		], {
+			server: {
+				baseDir: "./"
+			},
+			notify: false
+		})
+	});
+
+	// Fire file-change events manually for greater control
+	grunt.registerTask("bs-reload", function () {
+		bs.events.emit("file:changed", {path: "main.css"});
+	});
+
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['sass:dev', 'autoprefixer:dev', 'watch']);
-	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'watch']);
+	grunt.registerTask('default', ['sass:dev', 'autoprefixer:dev', 'bs-start', 'watch']);
+	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-start', 'watch']);
 	grunt.registerTask('build', ['sprite', 'sass:dist', 'autoprefixer:dist', 'usebanner']);
 
 };
