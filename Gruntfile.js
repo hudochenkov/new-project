@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 					'main.css': 'sass/main.scss'
 				},
 				options: {
-					sourcemap: false,
+					sourcemap: 'none',
 					unixNewlines: true,
 					style: 'expanded'
 				}
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 					'main.css': 'sass/main.scss'
 				},
 				options: {
-					sourcemap: true,
+					sourcemap: 'auto',
 					unixNewlines: true,
 					style: 'expanded'
 				}
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 					'main.css': 'sass/main.scss'
 				},
 				options: {
-					sourcemap: false,
+					sourcemap: 'none',
 					unixNewlines: true,
 					style: 'compressed'
 				}
