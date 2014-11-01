@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 				'src': ['img/sprite/*.png', '!<%= sprite.buildretina.src %>'],
 				'destImg': 'img/sprite.png',
 				'padding': 10,
-				'cssTemplate': '../spritesmith-retina-mixins.template.mustache',
+				'cssTemplate': 'scss/spritesmith-retina-mixins.template.mustache',
 
 				'cssVarMap': function (sprite) {
 					sprite.image = sprite.image.replace(".png", "");
