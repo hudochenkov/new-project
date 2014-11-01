@@ -1,0 +1,15 @@
+%last {
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+%clearfix {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
