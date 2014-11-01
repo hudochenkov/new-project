@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 		sass: {
 			dev: {
 				files: {
-					'main.css': 'sass/main.scss'
+					'main.css': 'scss/main.scss'
 				},
 				options: {
 					sourcemap: 'none',
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 			},
 			debug: {
 				files: {
-					'main.css': 'sass/main.scss'
+					'main.css': 'scss/main.scss'
 				},
 				options: {
 					sourcemap: 'auto',
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'main.css': 'sass/main.scss'
+					'main.css': 'scss/main.scss'
 				},
 				options: {
 					sourcemap: 'none',
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 			buildretina: {
 				'src': ['img/sprite/*@2x.png'],
 				'destImg': 'img/sprite@2x.png',
-				'destCSS': 'sass/_sprite.scss',
+				'destCSS': 'scss/_sprite.scss',
 				'algorithm': 'binary-tree',
 				'padding': 20,
 				'engine': 'auto'
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
 
 		watch: {
 			sass: {
-				files: ['sass/*.scss'],
+				files: ['scss/*.scss'],
 				tasks: ['sass:dev', 'autoprefixer:dev'],
 			},
 			sprites: {
