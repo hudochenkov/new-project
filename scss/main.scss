@@ -10,12 +10,10 @@ html {
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
 }
-body, select, input, textarea, button {
-	color: #000;
-	font-family: sans-serif;
-}
 body {
-	font: 13px/18px sans-serif;
+	background: #fff;
+	color: $default-color;
+	font: 13px/18px $default-font;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
@@ -36,40 +34,41 @@ a {
 }
 input, select, textarea, button {
 	margin: 0;
+	color: $default-color;
 	font-size: 100%;
+	font-family: $default-font;
 }
-	input, select {
-		vertical-align: middle;
-	}
-	input, button {
-		line-height: normal;
-	}
-	input[type="radio"] {
-		vertical-align: text-bottom;
-	}
-	input[type="checkbox"] {
-		vertical-align: bottom;
-	}
-	button,
-	input[type="submit"] {
-		cursor: pointer;
-		-webkit-appearance: button;
-	}
-	button::-moz-focus-inner,
-	input::-moz-focus-inner {
-		margin-top: -2px;
-		margin-bottom: -2px;
-		padding: 0;
-		border: 0;
-	}
-	textarea {
-		overflow: auto;
-		vertical-align: top;
-		resize: vertical;
-	}
-	.text-input,
-	textarea {
-	}
+input, select {
+	vertical-align: middle;
+}
+input, button {
+	line-height: normal;
+}
+input[type="radio"] {
+	vertical-align: text-bottom;
+}
+input[type="checkbox"] {
+	vertical-align: bottom;
+}
+button,
+input[type="submit"] {
+	cursor: pointer;
+	-webkit-appearance: button;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	margin-top: -2px;
+	margin-bottom: -2px;
+	padding: 0;
+	border: 0;
+}
+textarea {
+	overflow: auto;
+	vertical-align: top;
+	resize: vertical;
+}
+.textfield {
+}
 img {
 	vertical-align: top;
 }
@@ -83,12 +82,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-	th {
-		font-weight: bold;
-	}
-	td {
-		vertical-align: top;
-	}
+th {
+	font-weight: bold;
+}
+td {
+	vertical-align: top;
+}
 
 /* Common
 -----------------------------------------------------------------------------*/
