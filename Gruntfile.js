@@ -1,6 +1,16 @@
 module.exports = function(grunt) {
 
+	var project = {
+		scssFolder: 'scss',
+		scss: 'scss/main.scss',
+		css: 'main.css',
+		img: 'img',
+		js: 'js'
+	}
+
 	grunt.initConfig({
+
+		project: project,
 
 		sass: {
 			options: {
@@ -14,12 +24,12 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				files: {
-					'main.css': 'scss/main.scss'
+					'<%= project.css %>': '<%= project.scss %>'
 				}
 			},
 			debug: {
 				files: {
-					'main.css': 'scss/main.scss'
+					'<%= project.css %>': '<%= project.scss %>'
 				},
 				options: {
 					sourcemap: 'auto',
@@ -28,7 +38,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'main.css': 'scss/main.scss'
+					'<%= project.css %>': '<%= project.scss %>'
 				},
 				options: {
 					style: 'compressed'
@@ -41,13 +51,13 @@ module.exports = function(grunt) {
 				browsers: ['last 2 versions', '> 1%']
 			},
 			default: {
-				src: 'main.css',
+				src: '<%= project.css %>',
 				options: {
 					map: false
 				}
 			},
 			debug: {
-				src: 'main.css',
+				src: '<%= project.css %>',
 				options: {
 					map: true
 				}
@@ -56,18 +66,18 @@ module.exports = function(grunt) {
 
 		// sprite: {
 		// 	buildretina: {
-		// 		'src': ['img/sprite/*@2x.png'],
-		// 		'destImg': 'img/sprite@2x.png',
-		// 		'destCSS': 'scss/_sprite.scss',
+		// 		'src': ['<%= project.img %>/sprite/*@2x.png'],
+		// 		'destImg': '<%= project.img %>/sprite@2x.png',
+		// 		'destCSS': '<%= project.scssFolder %>/_sprite.scss',
 		// 		'algorithm': 'binary-tree',
 		// 		'padding': 20,
 		// 		'engine': 'auto'
 		// 	},
 		// 	build: {
-		// 		'src': ['img/sprite/*.png', '!<%= sprite.buildretina.src %>'],
-		// 		'destImg': 'img/sprite.png',
+		// 		'src': ['<%= project.img %>/sprite/*.png', '!<%= sprite.buildretina.src %>'],
+		// 		'destImg': '<%= project.img %>/sprite.png',
 		// 		'padding': 10,
-		// 		'cssTemplate': 'scss/spritesmith-retina-mixins.template.mustache',
+		// 		'cssTemplate': '<%= project.scssFolder %>/spritesmith-retina-mixins.template.mustache',
 
 		// 		'cssVarMap': function (sprite) {
 		// 			sprite.image = sprite.image.replace(".png", "");
@@ -80,11 +90,11 @@ module.exports = function(grunt) {
 
 		watch: {
 			sass: {
-				files: ['scss/*.scss'],
+				files: ['<%= project.scssFolder %>/*.scss'],
 				tasks: ['sass:dev', 'autoprefixer:default'],
 			}
 			// sprites: {
-			// 	files: ['img/sprite/*.png'],
+			// 	files: ['<%= project.img %>/sprite/*.png'],
 			// 	tasks: ['sprite'],
 			// }
 		}
@@ -97,9 +107,9 @@ module.exports = function(grunt) {
 	grunt.registerTask("bs-start", function () {
 		var browserSync = require("browser-sync");
 		bs = browserSync.init([
-			'main.css',
+			project.css,
 			'*.html',
-			'js/*.js',
+			project.js + '/*.js',
 		], {
 			server: {
 				baseDir: "./"
@@ -110,7 +120,7 @@ module.exports = function(grunt) {
 
 	// Fire file-change events manually for greater control
 	grunt.registerTask("bs-reload", function () {
-		bs.events.emit("file:changed", {path: "main.css"});
+		bs.events.emit("file:changed", {path: project.css});
 	});
 
 	require('load-grunt-tasks')(grunt);
