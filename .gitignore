@@ -2,3 +2,6 @@ node_modules
 .sass-cache
 *.css
 *.css.map
+img/sprite.png
+img/sprite@2x.png
+scss/_sprite.scss
