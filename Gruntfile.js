@@ -2,26 +2,15 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 
-		usebanner: {
-			dist: {
-				options: {
-					position: 'top',
-					banner: '/*\n' +
-					        'Author:     Aleks Hudochenkov\n' +
-					        'Release:    <%= grunt.template.today("dd.mm.yyyy") %>\n' +
-					        '-----------------------------------------------------------------------------*/\n'
-				},
-				files: {
-					src: [ 'main.css' ]
-				}
-			}
-		},
-
 		sass: {
 			options: {
 				sourcemap: 'none',
 				unixNewlines: true,
-				style: 'expanded'
+				style: 'expanded',
+				banner: '/*\n' +
+				        'Author:     Aleks Hudochenkov\n' +
+				        'Release:    <%= grunt.template.today("dd.mm.yyyy") %>\n' +
+				        '-----------------------------------------------------------------------------*/\n'
 			},
 			dev: {
 				files: {
@@ -33,7 +22,8 @@ module.exports = function(grunt) {
 					'main.css': 'scss/main.scss'
 				},
 				options: {
-					sourcemap: 'auto'
+					sourcemap: 'auto',
+					banner: null
 				}
 			},
 			dist: {
@@ -127,6 +117,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['sass:dev', 'autoprefixer:default', 'bs-start', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-start', 'watch']);
-	grunt.registerTask('build', ['sprite', 'sass:dist', 'autoprefixer:default', 'usebanner']);
+	grunt.registerTask('build', ['sprite', 'sass:dist', 'autoprefixer:default']);
 
 };
