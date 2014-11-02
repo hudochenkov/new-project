@@ -18,14 +18,14 @@ module.exports = function(grunt) {
 		},
 
 		sass: {
+			options: {
+				sourcemap: 'none',
+				unixNewlines: true,
+				style: 'expanded'
+			},
 			dev: {
 				files: {
 					'main.css': 'scss/main.scss'
-				},
-				options: {
-					sourcemap: 'none',
-					unixNewlines: true,
-					style: 'expanded'
 				}
 			},
 			debug: {
@@ -33,9 +33,7 @@ module.exports = function(grunt) {
 					'main.css': 'scss/main.scss'
 				},
 				options: {
-					sourcemap: 'auto',
-					unixNewlines: true,
-					style: 'expanded'
+					sourcemap: 'auto'
 				}
 			},
 			dist: {
@@ -43,8 +41,6 @@ module.exports = function(grunt) {
 					'main.css': 'scss/main.scss'
 				},
 				options: {
-					sourcemap: 'none',
-					unixNewlines: true,
 					style: 'compressed'
 				}
 			}
@@ -54,7 +50,7 @@ module.exports = function(grunt) {
 			options: {
 				browsers: ['last 2 versions', '> 1%']
 			},
-			dev: {
+			default: {
 				src: 'main.css',
 				options: {
 					map: false
@@ -64,12 +60,6 @@ module.exports = function(grunt) {
 				src: 'main.css',
 				options: {
 					map: true
-				}
-			},
-			dist: {
-				src: 'main.css',
-				options: {
-					map: false
 				}
 			}
 		},
@@ -101,7 +91,7 @@ module.exports = function(grunt) {
 		watch: {
 			sass: {
 				files: ['scss/*.scss'],
-				tasks: ['sass:dev', 'autoprefixer:dev'],
+				tasks: ['sass:dev', 'autoprefixer:default'],
 			},
 			sprites: {
 				files: ['img/sprite/*.png'],
@@ -135,8 +125,8 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['sass:dev', 'autoprefixer:dev', 'bs-start', 'watch']);
+	grunt.registerTask('default', ['sass:dev', 'autoprefixer:default', 'bs-start', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-start', 'watch']);
-	grunt.registerTask('build', ['sprite', 'sass:dist', 'autoprefixer:dist', 'usebanner']);
+	grunt.registerTask('build', ['sprite', 'sass:dist', 'autoprefixer:default', 'usebanner']);
 
 };
