@@ -98,6 +98,20 @@ module.exports = function(grunt) {
 			}
 		},
 
+		imagemin: {
+			default: {
+				options: {
+					optimizationLevel: 6
+				},
+				files: [{
+					expand: true,
+					cwd: '<%= project.imgSrc %>/',
+					src: ['**/*.{png,jpg,gif,svg}'],
+					dest: '<%= project.img %>'
+				}]
+			}
+		},
+
 		// sprite: {
 		// 	buildretina: {
 		// 		'src': ['<%= project.img %>/sprite/*@2x.png'],
@@ -175,6 +189,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'autoprefixer:default', 'bs-init', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-init', 'watch']);
-	grunt.registerTask('build', ['clear:images', 'copy:images', 'concat:jslibs', 'sass:dist', 'autoprefixer:default']);
+	grunt.registerTask('build', ['clear:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'autoprefixer:default']);
 
 };
