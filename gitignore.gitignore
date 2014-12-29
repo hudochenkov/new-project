@@ -1,8 +1,13 @@
-_work-files
-node_modules
-.sass-cache
+# Generated stuff
 *.css
 *.css.map
-img/sprite.png
-img/sprite@2x.png
-scss/_sprite.scss
+img/*
+js/libs.js
+
+# Dev folder
+node_modules
+.sass-cache
+dev/scss/_sprite.scss
+dev/img/sprite.png
+dev/img/sprite@2x.png
+_work-files

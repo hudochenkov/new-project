@@ -5,9 +5,11 @@ module.exports = function(grunt) {
 	var project = {
 		scssFolder: 'scss',
 		scss: 'scss/main.scss',
-		css: 'main.css',
-		img: 'img',
-		js: 'js'
+		css: '../main.css',
+		imgSrc: 'img',
+		img: '../img',
+		jsSrc: 'js',
+		js: '../js'
 	}
 
 	grunt.initConfig({
@@ -66,6 +68,36 @@ module.exports = function(grunt) {
 			}
 		},
 
+		clean: {
+			images: ['<%= project.img %>'],
+			options: {
+				force: true
+			}
+		},
+
+		copy: {
+			images: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= project.imgSrc %>/',
+						src: ['**'],
+						dest: '<%= project.img %>'
+					}
+				]
+			}
+		},
+
+		concat: {
+			options: {
+				separator: '\n'
+			},
+			jslibs: {
+				src: ['<%= project.jsSrc %>/libs/*.js'],
+				dest: '<%= project.js %>/libs.js'
+			}
+		},
+
 		// sprite: {
 		// 	buildretina: {
 		// 		'src': ['<%= project.img %>/sprite/*@2x.png'],
@@ -97,7 +129,15 @@ module.exports = function(grunt) {
 			sass: {
 				files: ['<%= project.scssFolder %>/*.scss'],
 				tasks: ['sass:dev', 'autoprefixer:default', 'bs-inject'],
-			}
+			},
+			img: {
+				files: ['<%= project.imgSrc %>/**/*.{png,jpg,gif,svg}'],
+				tasks: ['newer:copy:images']
+			},
+			js: {
+				files: ['<%= project.jsSrc %>/libs/*.js'],
+				tasks: ['concat:jslibs']
+			},
 			// sprites: {
 			// 	files: ['<%= project.img %>/sprite/*.png'],
 			// 	tasks: ['sprite'],
@@ -110,7 +150,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('bs-init', function () {
 		var done = this.async();
 		browserSync({
-			server: './',
+			server: '../',
 			notify: false,
 			online: false,
 			ghostMode: {
@@ -133,8 +173,8 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['sass:dev', 'autoprefixer:default', 'bs-init', 'watch']);
+	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'autoprefixer:default', 'bs-init', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-init', 'watch']);
-	grunt.registerTask('build', ['sass:dist', 'autoprefixer:default']);
+	grunt.registerTask('build', ['clear:images', 'copy:images', 'concat:jslibs', 'sass:dist', 'autoprefixer:default']);
 
 };
