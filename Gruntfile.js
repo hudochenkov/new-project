@@ -1,3 +1,5 @@
+var browserSync = require('browser-sync');
+
 module.exports = function(grunt) {
 
 	var project = {
@@ -89,9 +91,12 @@ module.exports = function(grunt) {
 		// },
 
 		watch: {
+			options: {
+				spawn: false
+			},
 			sass: {
 				files: ['<%= project.scssFolder %>/*.scss'],
-				tasks: ['sass:dev', 'autoprefixer:default'],
+				tasks: ['sass:dev', 'autoprefixer:default', 'bs-inject'],
 			}
 			// sprites: {
 			// 	files: ['<%= project.img %>/sprite/*.png'],
@@ -101,32 +106,35 @@ module.exports = function(grunt) {
 
 	});
 
-	// Start BrowserSync via the API
-	// using this code because of bug related to autoprefixer https://github.com/shakyShane/grunt-browser-sync/issues/50
-	var bs;
-	grunt.registerTask("bs-start", function () {
-		var browserSync = require("browser-sync");
-		bs = browserSync.init([
-			project.css,
-			'*.html',
-			project.js + '/*.js',
-		], {
-			server: {
-				baseDir: "./"
+	// Init BrowserSync
+	grunt.registerTask('bs-init', function () {
+		var done = this.async();
+		browserSync({
+			server: './',
+			notify: false,
+			online: false,
+			ghostMode: {
+				scroll: false
 			},
-			notify: false
-		})
+			files: [
+				'*.html',
+				project.js + '/*.js',
+				project.img + '/**/*.{png,jpg,gif,svg}',
+			]
+		}, function (err, bs) {
+			done();
+		});
 	});
 
-	// Fire file-change events manually for greater control
-	grunt.registerTask("bs-reload", function () {
-		bs.events.emit("file:changed", {path: project.css});
+	// Inject CSS
+	grunt.registerTask('bs-inject', function () {
+		browserSync.reload([project.css]);
 	});
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['sass:dev', 'autoprefixer:default', 'bs-start', 'watch']);
-	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-start', 'watch']);
+	grunt.registerTask('default', ['sass:dev', 'autoprefixer:default', 'bs-init', 'watch']);
+	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-init', 'watch']);
 	grunt.registerTask('build', ['sass:dist', 'autoprefixer:default']);
 
 };
