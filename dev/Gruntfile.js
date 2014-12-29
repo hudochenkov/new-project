@@ -93,7 +93,10 @@ module.exports = function(grunt) {
 				separator: '\n'
 			},
 			jslibs: {
-				src: ['<%= project.jsSrc %>/libs/*.js'],
+				src: [
+					'bower_components/jquery/dist/jquery.min.js',
+					'<%= project.jsSrc %>/libs/*.js',
+				],
 				dest: '<%= project.js %>/libs.js'
 			}
 		},

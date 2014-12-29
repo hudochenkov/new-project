@@ -6,6 +6,7 @@ js/libs.js
 
 # Dev folder
 node_modules
+bower_components
 .sass-cache
 dev/scss/_sprite.scss
 dev/img/*
