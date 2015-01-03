@@ -171,6 +171,23 @@ module.exports = function(grunt) {
 			}
 		},
 
+		'ftp-deploy': {
+			all: {
+				auth: grunt.file.readJSON(process.env.HOME + '/.grunt-ftp-deploy-config'),
+				src: '../',
+				dest: '/show/<%= pkg.name %>',
+				exclusions: [
+					'../**/.DS_Store',
+					'../**/Thumbs.db',
+					'../.git',
+					'../.gitignore',
+					'../*.sublime-*',
+					'../README.md',
+					'../dev',
+				]
+			}
+		},
+
 		imagemin: {
 			default: {
 				options: {
@@ -263,5 +280,20 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'autoprefixer:default', 'bs-init', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-init', 'watch']);
 	grunt.registerTask('build', ['clear:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'autoprefixer:default']);
+
+	// Deploy
+	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
+
+	grunt.registerTask('showURL', 'Show upload folder URL', function() {
+
+		var url = "http://hudochenkov.com/show/" + grunt.config("pkg.name") + "/";
+
+		grunt.log.writeln("URL: " + url);
+
+		// Copy URL to clipboard
+		var proc = require('child_process').spawn('pbcopy');
+		proc.stdin.write(url);
+		proc.stdin.end();
+	});
 
 };
