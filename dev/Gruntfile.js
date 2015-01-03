@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		project: project,
+		pkg: grunt.file.readJSON('package.json'),
 
 		sass: {
 			options: {
@@ -104,7 +105,7 @@ module.exports = function(grunt) {
 		compress: {
 			all: {
 				options: {
-					archive: process.cwd().substring(0, process.cwd().lastIndexOf('/')).substring(process.cwd().substring(0, process.cwd().lastIndexOf('/')).lastIndexOf('/') + 1).toLowerCase().replace(" ", "_") + '_markup-all__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
+					archive: '<%= pkg.name %>__markup-all__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
 				},
 				files: [
 					{
@@ -125,7 +126,7 @@ module.exports = function(grunt) {
 			},
 			markup: {
 				options: {
-					archive: process.cwd().substring(0, process.cwd().lastIndexOf('/')).substring(process.cwd().substring(0, process.cwd().lastIndexOf('/')).lastIndexOf('/') + 1).toLowerCase().replace(" ", "_") + '_markup-clean__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
+					archive: '<%= pkg.name %>__markup-clean__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
 				},
 				files: [
 					{
@@ -142,7 +143,7 @@ module.exports = function(grunt) {
 			},
 			source: {
 				options: {
-					archive: process.cwd().substring(0, process.cwd().lastIndexOf('/')).substring(process.cwd().substring(0, process.cwd().lastIndexOf('/')).lastIndexOf('/') + 1).toLowerCase().replace(" ", "_") + '_markup-source__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
+					archive: '<%= pkg.name %>__markup-source__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
 				},
 				files: [
 					{
