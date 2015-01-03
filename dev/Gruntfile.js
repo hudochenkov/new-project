@@ -101,6 +101,75 @@ module.exports = function(grunt) {
 			}
 		},
 
+		compress: {
+			all: {
+				options: {
+					archive: process.cwd().substring(0, process.cwd().lastIndexOf('/')).substring(process.cwd().substring(0, process.cwd().lastIndexOf('/')).lastIndexOf('/') + 1).toLowerCase().replace(" ", "_") + '_markup-all__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: '../',
+						src: [
+							'**/*',
+							'.gitignore',
+							'dev/.bowerrc',
+							'!**/node_modules/**',
+							'!**/bower_components/**',
+							'!**/_work-files/**',
+							'!**/*.sublime-*',
+							'!**/*.zip'
+						]
+					}
+				]
+			},
+			markup: {
+				options: {
+					archive: process.cwd().substring(0, process.cwd().lastIndexOf('/')).substring(process.cwd().substring(0, process.cwd().lastIndexOf('/')).lastIndexOf('/') + 1).toLowerCase().replace(" ", "_") + '_markup-clean__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: '../',
+						src: [
+							'**/*',
+							'!**/dev/**',
+							'!README.md',
+							'!**/*.sublime-*'
+						]
+					}
+				]
+			},
+			source: {
+				options: {
+					archive: process.cwd().substring(0, process.cwd().lastIndexOf('/')).substring(process.cwd().substring(0, process.cwd().lastIndexOf('/')).lastIndexOf('/') + 1).toLowerCase().replace(" ", "_") + '_markup-source__<%= grunt.template.today("yyyy-mm-dd--HH-MM") %>.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: '../',
+						src: [
+							'**/*',
+							'.gitignore',
+							'dev/.bowerrc',
+							'!**/node_modules/**',
+							'!**/bower_components/**',
+							'!**/_work-files/**',
+							'!**/*.sublime-*',
+							'!**/*.zip',
+							'!*.css',
+							'!*.css.map',
+							'!img/**',
+							'!js/libs.js',
+							'!dev/scss/_sprite.scss',
+							'!dev/img/sprite.png',
+							'!dev/img/sprite@2x.png'
+						]
+					}
+				]
+			}
+		},
+
 		imagemin: {
 			default: {
 				options: {
