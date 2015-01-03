@@ -3,6 +3,7 @@
 *.css.map
 img/*
 js/libs.js
+*.zip
 
 # Dev folder
 node_modules
