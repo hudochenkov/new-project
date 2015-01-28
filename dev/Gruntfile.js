@@ -261,7 +261,7 @@ module.exports = function(grunt) {
 				scroll: false
 			},
 			files: [
-				'*.html',
+				'../*.html',
 				project.js + '/*.js',
 				project.img + '/**/*.{png,jpg,gif,svg}',
 			]
