@@ -2,20 +2,22 @@
 
 main.css генерируется с помощью Grunt, Sass, Autoprefixer.
 
-** Не редактируйте main.css! Редактируйте только *.scss файлы и затем запускайте `grunt build`.**
+**Не редактируйте main.css! Редактируйте только .scss файлы и затем запускайте `grunt build`.**
 
 ## Установка
 
 1. Установить [Ruby](https://www.ruby-lang.org/en/installation/) (по-умолчанию стоит на Mac OS X).
 2. Установить [Sass](http://sass-lang.com/install).
 3. Установить [Node.js](http://nodejs.org/).
-4. Установить Grunt Command Line Interface (grunt-cli):
+4. Установить Grunt Command Line Interface (grunt-cli) and Bower:
 
         $ npm install -g grunt-cli
+        $ npm install -g bower
 
-5. Зайти в корень проекта (там, где лежит package.json) и установить все нужные компоненты для разработки:
+5. Зайти в папку __dev__ и установить все нужные модули для разработки:
 
         $ npm install
+        $ bower install
 
 6. Запустить `grunt build`.
 
@@ -29,6 +31,24 @@ main.css генерируется с помощью Grunt, Sass, Autoprefixer.
 
     $ grunt build
 
+# Расположение файлов:
+
+Картинки ложить в **/dev/img**. Они оптимизируются и копируются в _/img_ автоматически.
+
+JavaScript библиотеки и плагины ложить в **/dev/js**. Они конкатенируются в _/js/libs.js_. Скрипты в **/js/scripts.js** (не конкатенируются).
+
+HTML в корне проекта.
+
+## Другие Grunt-задачи
+
+**compress** — создать .zip:
+
+* **all** — исходники и сгенерированное
+* **markup** — только сгенерированное
+* **source** — только исходники
+
+**deploy** — залить файлы на сервер.
+
 ## Стоит почитать
 
 [Grunt для тех, кто считает штуки вроде него странными и сложными](http://frontender.info/grunt-is-not-weird-and-hard/)
@@ -39,22 +59,22 @@ main.css генерируется с помощью Grunt, Sass, Autoprefixer.
 
 All CSS generated with Sass, Autoprefixer and Grunt.
 
-**DON'T EDIT main.css! Edit only *.scss files and then compile with `grunt build`.**
+**DON'T EDIT main.css! Edit only .scss files and then compile with `grunt build`.**
 
 ## Setup
 
 1. Install [Ruby](https://www.ruby-lang.org/en/installation/) (already installed in Mac OS X).
 2. Install [Sass](http://sass-lang.com/install).
 3. Install [Node.js](http://nodejs.org/).
-4. Install Grunt Command Line Interface (grunt-cli):
+4. Install Grunt Command Line Interface (grunt-cli) and Bower:
 
         $ npm install -g grunt-cli
+        $ npm install -g bower
 
-5. In website root folder:
+5. In __dev__ folder install development modules:
 
         $ npm install
-
-    This install all needed node.js-modules.
+        $ bower install
 
 6. Run `grunt build`.
 
@@ -67,6 +87,14 @@ Start watching service which generate _dev_ version (unminified) on each *.scss-
 Generate _production_ (minified) version:
 
     $ grunt build
+
+## Files placement
+
+Images put in **/dev/img**. They optimized and copied in _/img_ automatically.
+
+JavaScript libraries and plugins put in **/dev/js**. They concatenated in _/js/libs.js_. Scripts in **/js/scripts.js** (not concatenated).
+
+HTML in project root.
 
 ## Worth reading
 
