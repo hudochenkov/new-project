@@ -21,11 +21,7 @@ module.exports = function(grunt) {
 			options: {
 				sourcemap: 'none',
 				unixNewlines: true,
-				style: 'expanded',
-				banner: '/*\n' +
-				        'Author:     Aleks Hudochenkov\n' +
-				        'Release:    <%= grunt.template.today("dd.mm.yyyy") %>\n' +
-				        '-----------------------------------------------------------------------------*/\n'
+				style: 'expanded'
 			},
 			dev: {
 				files: {
@@ -37,8 +33,7 @@ module.exports = function(grunt) {
 					'<%= project.css %>': '<%= project.scss %>'
 				},
 				options: {
-					sourcemap: 'auto',
-					banner: null
+					sourcemap: 'auto'
 				}
 			},
 			dist: {
@@ -67,6 +62,21 @@ module.exports = function(grunt) {
 				src: '<%= project.css %>',
 				options: {
 					map: true
+				}
+			}
+		},
+
+		usebanner: {
+			default: {
+				options: {
+					position: 'top',
+					banner: '/*\n' +
+					        'Author:     Aleks Hudochenkov (hudochenkov.com)\n' +
+					        'Version:    <%= grunt.template.today("dd.mm.yyyy") %>\n' +
+					        '-----------------------------------------------------------------------------*/\n'
+				},
+				files: {
+					src: [ '<%= project.css %>' ]
 				}
 			}
 		},
@@ -282,6 +292,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'postcss:default', 'bs-init', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'bs-init', 'watch']);
 	grunt.registerTask('build', ['clean:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'postcss:default']);
+	grunt.registerTask('build', ['clean:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'postcss:default', 'usebanner']);
 
 	// Deploy
 	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
