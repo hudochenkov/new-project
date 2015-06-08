@@ -1,5 +1,3 @@
-var browserSync = require('browser-sync');
-
 module.exports = function(grunt) {
 
 	var project = {
@@ -238,13 +236,38 @@ module.exports = function(grunt) {
 		// 	}
 		// },
 
+		browserSync: {
+			bsFiles: {
+				src: [
+					'../*.html',
+					project.js + '/*.js',
+					project.img + '/**/*.{png,jpg,gif,svg}',
+				]
+			},
+			options: {
+				server: {
+					baseDir: "../"
+				},
+				watchTask: true,
+				notify: false,
+				online: false,
+				ghostMode: false
+			}
+		},
+
+		bsReload: {
+			css: {
+				reload: "<%= project.css %>"
+			}
+		},
+
 		watch: {
 			options: {
 				spawn: false
 			},
 			sass: {
 				files: ['<%= project.scssFolder %>/*.scss'],
-				tasks: ['sass:dev', 'postcss:default', 'bs-inject'],
+				tasks: ['sass:dev', 'postcss:default', 'bsReload:css'],
 			},
 			img: {
 				files: ['<%= project.imgSrc %>/**/*.{png,jpg,gif,svg}'],
@@ -262,36 +285,10 @@ module.exports = function(grunt) {
 
 	});
 
-	// Init BrowserSync
-	grunt.registerTask('bs-init', function () {
-		var done = this.async();
-		browserSync({
-			server: '../',
-			notify: false,
-			online: false,
-			ghostMode: {
-				scroll: false
-			},
-			files: [
-				'../*.html',
-				project.js + '/*.js',
-				project.img + '/**/*.{png,jpg,gif,svg}',
-			]
-		}, function (err, bs) {
-			done();
-		});
-	});
-
-	// Inject CSS
-	grunt.registerTask('bs-inject', function () {
-		browserSync.reload([project.css]);
-	});
-
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'postcss:default', 'bs-init', 'watch']);
-	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'bs-init', 'watch']);
-	grunt.registerTask('build', ['clean:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'postcss:default']);
+	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'postcss:default', 'browserSync', 'watch']);
+	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
 	grunt.registerTask('build', ['clean:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'postcss:default', 'usebanner']);
 
 	// Deploy
