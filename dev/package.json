@@ -2,9 +2,9 @@
   "name": "site_markup",
   "version": "0.0.0",
   "devDependencies": {
+    "autoprefixer-core": "^5.2.0",
     "browser-sync": "^1.8.2",
     "grunt": "^0.4.5",
-    "grunt-autoprefixer": "^2.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compress": "^0.13.0",
     "grunt-contrib-concat": "^0.5.0",
@@ -14,6 +14,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-ftp-deploy": "^0.1.9",
     "grunt-newer": "^0.8.0",
+    "grunt-postcss": "^0.4.0",
     "grunt-spritesmith": "^3.5.0",
     "load-grunt-tasks": "^2.0.0"
   }

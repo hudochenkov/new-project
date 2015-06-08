@@ -51,15 +51,17 @@ module.exports = function(grunt) {
 			}
 		},
 
-		autoprefixer: {
+		postcss: {
 			options: {
-				browsers: ['last 2 versions', '> 1%']
+				map: false,
+				processors: [
+					require('autoprefixer-core')({
+						browsers: ['last 2 versions', '> 1%']
+					})
+				]
 			},
 			default: {
-				src: '<%= project.css %>',
-				options: {
-					map: false
-				}
+				src: '<%= project.css %>'
 			},
 			debug: {
 				src: '<%= project.css %>',
@@ -232,7 +234,7 @@ module.exports = function(grunt) {
 			},
 			sass: {
 				files: ['<%= project.scssFolder %>/*.scss'],
-				tasks: ['sass:dev', 'autoprefixer:default', 'bs-inject'],
+				tasks: ['sass:dev', 'postcss:default', 'bs-inject'],
 			},
 			img: {
 				files: ['<%= project.imgSrc %>/**/*.{png,jpg,gif,svg}'],
@@ -277,9 +279,9 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'autoprefixer:default', 'bs-init', 'watch']);
-	grunt.registerTask('debug', ['sass:debug', 'autoprefixer:debug', 'bs-init', 'watch']);
-	grunt.registerTask('build', ['clear:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'autoprefixer:default']);
+	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'postcss:default', 'bs-init', 'watch']);
+	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'bs-init', 'watch']);
+	grunt.registerTask('build', ['clean:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'postcss:default']);
 
 	// Deploy
 	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
