@@ -17,9 +17,8 @@ module.exports = function(grunt) {
 
 		sass: {
 			options: {
-				sourcemap: 'none',
-				unixNewlines: true,
-				style: 'expanded'
+				sourceMap: false,
+				outputStyle: 'expanded'
 			},
 			dev: {
 				files: {
@@ -31,7 +30,7 @@ module.exports = function(grunt) {
 					'<%= project.css %>': '<%= project.scss %>'
 				},
 				options: {
-					sourcemap: 'auto'
+					sourceMap: true
 				}
 			},
 			dist: {
@@ -39,7 +38,7 @@ module.exports = function(grunt) {
 					'<%= project.css %>': '<%= project.scss %>'
 				},
 				options: {
-					style: 'compressed'
+					outputStyle: 'compressed'
 				}
 			}
 		},
