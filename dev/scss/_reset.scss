@@ -143,7 +143,7 @@ html input[type="button"], /* 1 */
 input[type="reset"],
 input[type="submit"] {
 	cursor: pointer; /* 3 */
-	appearance: button; /* 2 */
+	-webkit-appearance: button; /* 2 */
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
