@@ -182,7 +182,7 @@ module.exports = function(grunt) {
 
 		'ftp-deploy': {
 			all: {
-				auth: grunt.file.readJSON(process.env.HOME + '/.grunt-ftp-deploy-config'),
+				auth: grunt.file.exists(process.env.HOME + '/.grunt-ftp-deploy-config') ? grunt.file.readJSON(process.env.HOME + '/.grunt-ftp-deploy-config') : {},
 				src: '../',
 				dest: '/show/<%= pkg.name %>',
 				exclusions: [
