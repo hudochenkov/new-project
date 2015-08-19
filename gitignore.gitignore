@@ -1,15 +1,11 @@
 # Generated stuff
-*.css
-*.css.map
-img/*
-js/libs.js
+build
 *.zip
 
 # Dev folder
 node_modules
 bower_components
-.sass-cache
-dev/scss/_sprite.scss
+dev/pcss/_sprite.pcss
 dev/img/sprite.png
 dev/img/sprite@2x.png
 _work-files
