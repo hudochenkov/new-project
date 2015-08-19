@@ -205,9 +205,35 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: '<%= project.imgSrc %>/',
-					src: ['**/*.{png,jpg,gif,svg}'],
+					src: ['**/*.{png,jpg,gif,svg}', '!svg-sprite/*.svg'],
 					dest: '<%= project.img %>'
 				}]
+			}
+		},
+
+		svgstore: {
+			options: {
+				prefix: 'icon-',
+				svg: {
+					style: 'width: 0; height: 0; visibility: hidden;'
+				}
+			},
+			dev: {
+				files: {
+					'<%= project.img %>/sprite.svg': ['img/svg-sprite/*.svg'],
+				},
+				options: {
+					formatting: {
+						indent_char: '	',
+						indent_size: 1
+					},
+					includedemo: '<!doctype html><html><head><style>body{background: #eee;}svg{width:50px; height:50px; fill:black;}</style><head><body>\n{{{svg}}}\n\n{{#each icons}}<svg class="svg-icon"><use xlink:href="#{{name}}" /></svg>\n{{/each}}\n\n\n</body></html>\n'
+				}
+			},
+			dist: {
+				files: {
+					'<%= project.img %>/sprite.svg': ['img/svg-sprite/*.svg'],
+				}
 			}
 		},
 
@@ -270,7 +296,7 @@ module.exports = function(grunt) {
 			},
 			img: {
 				files: ['<%= project.imgSrc %>/**/*.{png,jpg,gif,svg}'],
-				tasks: ['newer:copy:images']
+				tasks: ['svgstore:dev', 'newer:copy:images']
 			},
 			js: {
 				files: ['<%= project.jsSrc %>/libs/*.js'],
@@ -286,9 +312,9 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['newer:copy:images', 'concat:jslibs', 'sass:dev', 'postcss:default', 'browserSync', 'watch']);
+	grunt.registerTask('default', ['newer:copy:images', 'svgstore:dev', 'concat:jslibs', 'sass:dev', 'postcss:default', 'browserSync', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
-	grunt.registerTask('build', ['clean:images', 'imagemin', 'concat:jslibs', 'sass:dist', 'postcss:default', 'usebanner']);
+	grunt.registerTask('build', ['clean:images', 'imagemin', 'svgstore:dist', 'concat:jslibs', 'sass:dist', 'postcss:default', 'usebanner']);
 
 	// Deploy
 	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
