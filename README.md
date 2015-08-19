@@ -1,29 +1,27 @@
 # Как работать с CSS
 
-main.css генерируется с помощью Grunt, Sass, Autoprefixer.
+main.css генерируется с помощью Grunt и PostCSS.
 
-**Не редактируйте main.css! Редактируйте только .scss файлы и затем запускайте `grunt build`.**
+**Не редактируйте main.css! Редактируйте только .pcss файлы и затем запускайте `grunt build`.**
 
 ## Установка
 
-1. Установить [Ruby](https://www.ruby-lang.org/en/installation/) (по-умолчанию стоит на Mac OS X).
-2. Установить [Sass](http://sass-lang.com/install).
-3. Установить [Node.js](http://nodejs.org/).
-4. Установить Grunt Command Line Interface (grunt-cli) and Bower:
+1. Установить [Node.js](http://nodejs.org/).
+2. Установить Grunt Command Line Interface (grunt-cli) and Bower:
 
         $ npm install -g grunt-cli
         $ npm install -g bower
 
-5. Зайти в папку __dev__ и установить все нужные модули для разработки:
+3. Зайти в папку __dev__ и установить все нужные модули для разработки:
 
         $ npm install
         $ bower install
 
-6. Запустить `grunt build`.
+4. Запустить `grunt build`.
 
 ## Генерация CSS
 
-Запустить следящий сервис, который будет генерировать dev-версию (несжатую) main.css при каждом сохранении *.scss файла:
+Запустить следящий сервис, который будет генерировать dev-версию (несжатую) main.css при каждом сохранении *.pcss файла:
 
     $ grunt
 
@@ -57,30 +55,28 @@ HTML в корне проекта.
 
 # How to edit CSS
 
-All CSS generated with Sass, Autoprefixer and Grunt.
+All CSS generated with Grunt and PostCSS.
 
-**DON'T EDIT main.css! Edit only .scss files and then compile with `grunt build`.**
+**DON'T EDIT main.css! Edit only .pcss files and then compile with `grunt build`.**
 
 ## Setup
 
-1. Install [Ruby](https://www.ruby-lang.org/en/installation/) (already installed in Mac OS X).
-2. Install [Sass](http://sass-lang.com/install).
-3. Install [Node.js](http://nodejs.org/).
-4. Install Grunt Command Line Interface (grunt-cli) and Bower:
+1. Install [Node.js](http://nodejs.org/).
+2. Install Grunt Command Line Interface (grunt-cli) and Bower:
 
         $ npm install -g grunt-cli
         $ npm install -g bower
 
-5. In __dev__ folder install development modules:
+3. In __dev__ folder install development modules:
 
         $ npm install
         $ bower install
 
-6. Run `grunt build`.
+4. Run `grunt build`.
 
 ## Generating CSS
 
-Start watching service which generate _dev_ version (unminified) on each *.scss-file save:
+Start watching service which generate _dev_ version (unminified) on each *.pcss-file save:
 
     $ grunt
 

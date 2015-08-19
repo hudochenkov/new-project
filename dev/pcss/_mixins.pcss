@@ -1,9 +1,4 @@
-%last {
-	&:last-child {
-		margin-bottom: 0;
-	}
-}
-%clearfix {
+@define-mixin clearfix {
 	&:before,
 	&:after {
 		content: " ";
@@ -11,5 +6,10 @@
 	}
 	&:after {
 		clear: both;
+	}
+}
+@define-mixin last {
+	&:last-child {
+		margin-bottom: 0;
 	}
 }

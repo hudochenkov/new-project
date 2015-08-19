@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 	var project = {
-		scssFolder: 'scss',
-		scss: 'scss/main.scss',
+		pcssFolder: 'pcss',
+		pcss: 'pcss/main.pcss',
 		css: '../main.css',
 		imgSrc: 'img',
 		img: '../img',
@@ -14,51 +14,44 @@ module.exports = function(grunt) {
 		project: project,
 		pkg: grunt.file.readJSON('package.json'),
 
-		sass: {
-			options: {
-				sourceMap: false,
-				outputStyle: 'expanded'
-			},
-			dev: {
-				files: {
-					'<%= project.css %>': '<%= project.scss %>'
-				}
-			},
-			debug: {
-				files: {
-					'<%= project.css %>': '<%= project.scss %>'
-				},
-				options: {
-					sourceMap: true
-				}
-			},
-			dist: {
-				files: {
-					'<%= project.css %>': '<%= project.scss %>'
-				},
-				options: {
-					outputStyle: 'compressed'
-				}
-			}
-		},
-
 		postcss: {
 			options: {
 				map: false,
 				processors: [
+					require('postcss-import')(),
+					require('postcss-mixins')(),
+					require('postcss-nested')(),
+					require('postcss-simple-vars')(),
+					require('postcss-property-lookup')(),
+					require('postcss-calc')(),
+					require('postcss-color-function')(),
 					require('autoprefixer-core')({
 						browsers: ['last 4 versions', '> 1%', 'Android >= 4', 'iOS >= 7']
 					})
 				]
 			},
 			default: {
-				src: '<%= project.css %>'
+				src: '<%= project.pcss %>',
+				dest: '<%= project.css %>'
 			},
-			debug: {
-				src: '<%= project.css %>',
+			minify: {
 				options: {
-					map: true
-				}
+					map: false,
+					processors: [
+						require('cssnano')({
+							autoprefixer: false,
+							calc: false,
+							comments: true,
+							fonts: true,
+							idents: true,
+							sourcemap: false,
+							unused: true,
+							urls: false,
+							zindex: true
+						})
+					]
+				},
+				src: '<%= project.css %>'
 			}
 		},
 
@@ -176,7 +169,7 @@ module.exports = function(grunt) {
 							'!*.css.map',
 							'!img/**',
 							'!js/libs.js',
-							'!dev/scss/_sprite.scss',
+							'!dev/pcss/_sprite.pcss',
 							'!dev/img/sprite.png',
 							'!dev/img/sprite@2x.png'
 						]
@@ -246,7 +239,7 @@ module.exports = function(grunt) {
 		// 	buildretina: {
 		// 		'src': ['<%= project.img %>/sprite/*@2x.png'],
 		// 		'destImg': '<%= project.img %>/sprite@2x.png',
-		// 		'destCSS': '<%= project.scssFolder %>/_sprite.scss',
+		// 		'destCSS': '<%= project.pcssFolder %>/_sprite.pcss',
 		// 		'algorithm': 'binary-tree',
 		// 		'padding': 20,
 		// 		'engine': 'auto'
@@ -255,7 +248,7 @@ module.exports = function(grunt) {
 		// 		'src': ['<%= project.img %>/sprite/*.png', '!<%= sprite.buildretina.src %>'],
 		// 		'destImg': '<%= project.img %>/sprite.png',
 		// 		'padding': 10,
-		// 		'cssTemplate': '<%= project.scssFolder %>/spritesmith-retina-mixins.template.mustache',
+		// 		'cssTemplate': '<%= project.pcssFolder %>/spritesmith-retina-mixins.template.mustache',
 
 		// 		'cssVarMap': function (sprite) {
 		// 			sprite.image = sprite.image.replace(".png", "");
@@ -295,9 +288,9 @@ module.exports = function(grunt) {
 			options: {
 				spawn: false
 			},
-			sass: {
-				files: ['<%= project.scssFolder %>/*.scss'],
-				tasks: ['sass:dev', 'postcss:default', 'bsReload:css'],
+			pcss: {
+				files: ['<%= project.pcssFolder %>/*.pcss'],
+				tasks: ['postcss:default', 'bsReload:css'],
 			},
 			img: {
 				files: ['<%= project.imgSrc %>/**/*.{png,jpg,gif,svg}'],
@@ -317,10 +310,10 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('default', ['newer:copy:images', 'svgstore:dev', 'concat:jslibs', 'sass:dev', 'postcss:default', 'browserSync', 'watch']);
-	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
+	grunt.registerTask('default', ['newer:copy:images', 'svgstore:dev', 'concat:jslibs', 'postcss:default', 'browserSync', 'watch']);
+	// grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
 	grunt.registerTask('test', ['jscs']);
-	grunt.registerTask('build', ['clean:images', 'imagemin', 'svgstore:dist', 'concat:jslibs', 'sass:dist', 'postcss:default', 'usebanner']);
+	grunt.registerTask('build', ['clean:images', 'imagemin', 'svgstore:dist', 'concat:jslibs', 'postcss:default', 'postcss:minify', 'usebanner']);
 
 	// Deploy
 	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
