@@ -1,6 +1,10 @@
 {
   "name": "site_markup",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "front-end",
+  "repository": "hudochenkov/new-project",
+  "license": "MIT",
+  "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
