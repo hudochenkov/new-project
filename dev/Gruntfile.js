@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
 	var project = {
 		scssFolder: 'scss',
 		scss: 'scss/main.scss',
@@ -8,7 +7,7 @@ module.exports = function(grunt) {
 		img: '../img',
 		jsSrc: 'js',
 		js: '../js'
-	}
+	};
 
 	grunt.initConfig({
 
@@ -68,12 +67,12 @@ module.exports = function(grunt) {
 				options: {
 					position: 'top',
 					banner: '/*\n' +
-					        'Author:     Aleks Hudochenkov (hudochenkov.com)\n' +
-					        'Version:    <%= grunt.template.today("dd.mm.yyyy") %>\n' +
-					        '-----------------------------------------------------------------------------*/\n'
+							'Author:     Aleks Hudochenkov (hudochenkov.com)\n' +
+							'Version:    <%= grunt.template.today("dd.mm.yyyy") %>\n' +
+							'-----------------------------------------------------------------------------*/\n'
 				},
 				files: {
-					src: [ '<%= project.css %>' ]
+					src: ['<%= project.css %>']
 				}
 			}
 		},
@@ -108,6 +107,12 @@ module.exports = function(grunt) {
 					'<%= project.jsSrc %>/libs/*.js',
 				],
 				dest: '<%= project.js %>/libs.js'
+			}
+		},
+
+		jscs: {
+			default: {
+				src: ['<%= project.js %>/scripts.js', 'Gruntfile.js']
 			}
 		},
 
@@ -271,7 +276,7 @@ module.exports = function(grunt) {
 			},
 			options: {
 				server: {
-					baseDir: "../"
+					baseDir: '../'
 				},
 				watchTask: true,
 				notify: false,
@@ -282,7 +287,7 @@ module.exports = function(grunt) {
 
 		bsReload: {
 			css: {
-				reload: "<%= project.css %>"
+				reload: '<%= project.css %>'
 			}
 		},
 
@@ -314,21 +319,20 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['newer:copy:images', 'svgstore:dev', 'concat:jslibs', 'sass:dev', 'postcss:default', 'browserSync', 'watch']);
 	grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
+	grunt.registerTask('test', ['jscs']);
 	grunt.registerTask('build', ['clean:images', 'imagemin', 'svgstore:dist', 'concat:jslibs', 'sass:dist', 'postcss:default', 'usebanner']);
 
 	// Deploy
 	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
 
 	grunt.registerTask('showURL', 'Show upload folder URL', function() {
+		var url = 'http://hudochenkov.com/show/' + grunt.config('pkg.name') + '/';
 
-		var url = "http://hudochenkov.com/show/" + grunt.config("pkg.name") + "/";
-
-		grunt.log.writeln("URL: " + url);
+		grunt.log.writeln('URL: ' + url);
 
 		// Copy URL to clipboard
 		var proc = require('child_process').spawn('pbcopy');
 		proc.stdin.write(url);
 		proc.stdin.end();
 	});
-
 };
