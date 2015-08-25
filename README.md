@@ -1,97 +1,61 @@
-# Как работать с CSS
+# How to work
 
-main.css генерируется с помощью Grunt и PostCSS.
-
-**Не редактируйте main.css! Редактируйте только .pcss файлы и затем запускайте `grunt build`.**
-
-## Установка
-
-1. Установить [Node.js](http://nodejs.org/).
-2. Установить Grunt Command Line Interface (grunt-cli) and Bower:
-
-        $ npm install -g grunt-cli
-        $ npm install -g bower
-
-3. Зайти в папку __dev__ и установить все нужные модули для разработки:
-
-        $ npm install
-        $ bower install
-
-4. Запустить `grunt build`.
-
-## Генерация CSS
-
-Запустить следящий сервис, который будет генерировать dev-версию (несжатую) main.css при каждом сохранении *.pcss файла:
-
-    $ grunt
-
-Сгенерировать версию для продакшена (минифицированную):
-
-    $ grunt build
-
-# Расположение файлов:
-
-Картинки ложить в **/dev/img**. Они оптимизируются и копируются в _/img_ автоматически.
-
-JavaScript библиотеки и плагины ложить в **/dev/js**. Они конкатенируются в _/js/libs.js_. Скрипты в **/js/scripts.js** (не конкатенируются).
-
-HTML в корне проекта.
-
-## Другие Grunt-задачи
-
-**compress** — создать .zip:
-
-* **all** — исходники и сгенерированное
-* **markup** — только сгенерированное
-* **source** — только исходники
-
-**deploy** — залить файлы на сервер.
-
-## Стоит почитать
-
-[Grunt для тех, кто считает штуки вроде него странными и сложными](http://frontender.info/grunt-is-not-weird-and-hard/)
-
-----------
-
-# How to edit CSS
-
-All CSS generated with Grunt and PostCSS.
-
-**DON'T EDIT main.css! Edit only .pcss files and then compile with `grunt build`.**
+All files for production are compiled with [Grunt]. CSS compiled with [PostCSS]. JavaScript libs and plugins are concatenated to the single file. Images are optimized and SVG compiled to SVG-sprite. HTML just copied.
 
 ## Setup
 
-1. Install [Node.js](http://nodejs.org/).
-2. Install Grunt Command Line Interface (grunt-cli) and Bower:
+1. Install [Node.js].
+2. Install [Grunt] CLI and [Bower]:
 
-        $ npm install -g grunt-cli
-        $ npm install -g bower
+		$ npm install -g grunt-cli
+		$ npm install -g bower
 
-3. In __dev__ folder install development modules:
+3. Install development modules:
 
-        $ npm install
-        $ bower install
+		$ npm install
+		$ bower install
 
 4. Run `grunt build`.
 
-## Generating CSS
+## Folders structure
 
-Start watching service which generate _dev_ version (unminified) on each *.pcss-file save:
+`root` — configs and dependencies.
 
-    $ grunt
+`build` — destination directory. There would be generated assets. Shouldn't be in repository.
 
-Generate _production_ (minified) version:
+`dev` — source directory for everything:
 
-    $ grunt build
+* dev root — HTML.
+* `img` — images.
+	* `img/svg-sprites` — svg for svg sprite.
+	* `img/temp` — temporary images. They don't go to production and for demonstration purpose only.
+* `js` — JavaScript.
+	* `js/libs` — JavaScript libraries and plugins, that can't be installed via bower or npm.
+* `pcss` — PostCSS files.
 
-## Files placement
+## Generate assets
 
-Images put in **/dev/img**. They optimized and copied in _/img_ automatically.
+Start watching service which generates _dev_ version on each source file change, also this start local webserver with autoreload:
 
-JavaScript libraries and plugins put in **/dev/js**. They concatenated in _/js/libs.js_. Scripts in **/js/scripts.js** (not concatenated).
+	$ grunt
 
-HTML in project root.
+Generate _production_ (minified and optimized) version:
 
-## Worth reading
+	$ grunt build
 
-[Grunt for People Who Think Things Like Grunt are Weird and Hard](http://24ways.org/2013/grunt-is-not-weird-and-hard/)
+## Other Grunt-tasks
+
+**test** — check JavaScript code style in scripts.js and Gruntfile.js.
+
+**compress** — make .zip:
+
+* **all** — sources and compiled files.
+* **markup** — only compiled
+* **source** — only sources
+
+**deploy** — upload files to the server.
+
+[Grunt]: http://gruntjs.com/
+[PostCSS]: https://github.com/postcss/postcss/
+[Node.js]: https://nodejs.org/
+[Bower]: http://bower.io/
