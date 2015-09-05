@@ -52,12 +52,13 @@ module.exports = function(grunt) {
 						require('cssnano')({
 							autoprefixer: false,
 							calc: false,
-							comments: true,
-							fonts: true,
-							idents: true,
+							discardComments: true,
+							discardUnused: true,
+							fontFamily: true,
+							mergeIdents: true,
+							normalizeUrl: false,
+							reduceIdents: true,
 							sourcemap: false,
-							unused: true,
-							urls: false,
 							zindex: true
 						})
 					]
