@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 					require('postcss-property-lookup')(),
 					require('postcss-calc')(),
 					require('postcss-color-function')(),
-					require('autoprefixer-core')({
+					require('autoprefixer')({
 						browsers: ['last 4 versions', '> 1%', 'Android >= 4', 'iOS >= 7']
 					})
 				]
@@ -52,13 +52,22 @@ module.exports = function(grunt) {
 						require('cssnano')({
 							autoprefixer: false,
 							calc: false,
+							colormin: true,
+							convertValues: false,
 							discardComments: true,
+							discardDuplicates: true,
+							discardEmpty: true,
 							discardUnused: true,
-							fontFamily: true,
 							mergeIdents: true,
+							mergeLonghand: true,
+							mergeRules: false,
+							minifyFontValues: true,
+							minifySelectors: true,
 							normalizeUrl: false,
+							orderedValues: false,
 							reduceIdents: true,
-							sourcemap: false,
+							singleCharset: true,
+							uniqueSelectors: true,
 							zindex: true
 						})
 					]
