@@ -63,10 +63,10 @@ module.exports = function(grunt) {
 							mergeRules: false,
 							minifyFontValues: true,
 							minifySelectors: true,
+							normalizeCharset: true,
 							normalizeUrl: false,
 							orderedValues: false,
 							reduceIdents: true,
-							singleCharset: true,
 							uniqueSelectors: true,
 							zindex: true
 						})
