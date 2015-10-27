@@ -6,6 +6,4 @@ build
 node_modules
 bower_components
 dev/pcss/_sprite.pcss
-dev/img/sprite.png
-dev/img/sprite@2x.png
 _work-files

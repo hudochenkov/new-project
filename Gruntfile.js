@@ -194,30 +194,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// sprite: {
-		// 	buildretina: {
-		// 		'src': ['<%= project.img %>/sprite/*@2x.png'],
-		// 		'destImg': '<%= project.img %>/sprite@2x.png',
-		// 		'destCSS': '<%= project.pcssFolder %>/_sprite.pcss',
-		// 		'algorithm': 'binary-tree',
-		// 		'padding': 20,
-		// 		'engine': 'auto'
-		// 	},
-		// 	build: {
-		// 		'src': ['<%= project.img %>/sprite/*.png', '!<%= sprite.buildretina.src %>'],
-		// 		'destImg': '<%= project.img %>/sprite.png',
-		// 		'padding': 10,
-		// 		'cssTemplate': '<%= project.pcssFolder %>/spritesmith-retina-mixins.template.mustache',
-
-		// 		'cssVarMap': function (sprite) {
-		// 			sprite.image = sprite.image.replace(".png", "");
-		// 		},
-		// 		'algorithm': '<%= sprite.buildretina.algorithm %>',
-		// 		'destCSS': '<%= sprite.buildretina.destCSS %>',
-		// 		'engine': '<%= sprite.buildretina.engine %>'
-		// 	}
-		// },
-
 		compress: {
 			all: {
 				options: {
@@ -274,9 +250,7 @@ module.exports = function(grunt) {
 							'!**/_work-files/**',
 							'!*.sublime-*',
 							'!**/*.zip',
-							'!<%= project.src %>/pcss/_sprite.pcss',
-							'!<%= project.img.src %>/sprite.png',
-							'!<%= project.img.src %>/sprite@2x.png'
+							'!<%= project.src %>/pcss/_sprite.pcss'
 						]
 					}
 				]
@@ -347,10 +321,6 @@ module.exports = function(grunt) {
 				files: ['<%= project.src %>/*.html'],
 				tasks: ['newer:copy:html']
 			},
-			// sprites: {
-			// 	files: ['<%= project.img %>/sprite/*.png'],
-			// 	tasks: ['sprite'],
-			// }
 		}
 
 	});
