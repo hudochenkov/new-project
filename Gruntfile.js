@@ -355,7 +355,9 @@ module.exports = function(grunt) {
 
 	});
 
-	require('load-grunt-tasks')(grunt);
+	require('jit-grunt')(grunt, {
+		usebanner: 'grunt-banner'
+	});
 
 	grunt.registerTask('default', ['newer:copy', 'svgstore:dev', 'concat:jslibs', 'postcss:default', 'browserSync', 'watch']);
 	// grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
