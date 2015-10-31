@@ -4,6 +4,4 @@ build
 
 # Dev folder
 node_modules
-bower_components
-dev/pcss/_sprite.pcss
 _work-files

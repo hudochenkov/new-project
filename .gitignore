@@ -4,7 +4,5 @@ build
 
 # Dev folder
 node_modules
-bower_components
-dev/pcss/_sprite.pcss
 dev/img/*
 !dev/img/.gitkeep

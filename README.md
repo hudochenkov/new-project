@@ -5,15 +5,13 @@ All files for production are compiled with [Grunt]. CSS compiled with [PostCSS].
 ## Setup
 
 1. Install [Node.js].
-2. Install [Grunt] CLI and [Bower]:
+2. Install [Grunt] CLI:
 
 		$ npm install -g grunt-cli
-		$ npm install -g bower
 
 3. Install development modules:
 
 		$ npm install
-		$ bower install
 
 4. Run `grunt build`.
 
@@ -30,7 +28,7 @@ All files for production are compiled with [Grunt]. CSS compiled with [PostCSS].
 	* `img/svg-sprites` — svg for svg sprite.
 	* `img/temp` — temporary images. They don't go to production and for demonstration purpose only.
 * `js` — JavaScript.
-	* `js/libs` — JavaScript libraries and plugins, that can't be installed via bower or npm.
+	* `js/libs` — JavaScript libraries and plugins, that can't be installed via npm.
 * `pcss` — PostCSS files.
 
 ## Generate assets
@@ -58,4 +56,3 @@ Generate _production_ (minified and optimized) version:
 [Grunt]: http://gruntjs.com/
 [PostCSS]: https://github.com/postcss/postcss/
 [Node.js]: https://nodejs.org/
-[Bower]: http://bower.io/

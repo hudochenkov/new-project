@@ -139,7 +139,7 @@ module.exports = function(grunt) {
 			},
 			jslibs: {
 				src: [
-					'bower_components/jquery/dist/jquery.min.js',
+					'node_modules/jquery/dist/jquery.min.js',
 					'<%= project.js.src %>/libs/*.js',
 				],
 				dest: '<%= project.js.build %>/libs.js'
@@ -204,12 +204,10 @@ module.exports = function(grunt) {
 						expand: true,
 						src: [
 							'**/*',
-							'.bowerrc',
 							'.editorconfig',
 							'.gitignore',
 							'.jscsrc',
 							'!node_modules/**',
-							'!bower_components/**',
 							'!**/_work-files/**',
 							'!*.sublime-*',
 							'!**/*.zip'
@@ -240,17 +238,14 @@ module.exports = function(grunt) {
 						expand: true,
 						src: [
 							'**/*',
-							'.bowerrc',
 							'.editorconfig',
 							'.gitignore',
 							'.jscsrc',
 							'!<%= project.build %>/**',
 							'!node_modules/**',
-							'!bower_components/**',
 							'!**/_work-files/**',
 							'!*.sublime-*',
-							'!**/*.zip',
-							'!<%= project.src %>/pcss/_sprite.pcss'
+							'!**/*.zip'
 						]
 					}
 				]
