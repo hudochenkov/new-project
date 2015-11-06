@@ -17,8 +17,8 @@ module.exports = function(grunt) {
 				src: 'dev/img',
 				build: 'build/img',
 				allExtensions: '**/*.{png,jpg,gif,svg}',
-				svgSprites: {
-					src: 'svg-sprites/*.svg',
+				svgSprite: {
+					src: 'svg-sprite/*.svg',
 					build: 'build/img/sprite.svg'
 				}
 			}
@@ -161,7 +161,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: '<%= project.img.src %>/',
-						src: ['<%= project.img.allExtensions %>', '!<%= project.img.svgSprites.src %>'],
+						src: ['<%= project.img.allExtensions %>', '!<%= project.img.svgSprite.src %>'],
 						dest: '<%= project.img.build %>'
 					}
 				]
@@ -177,7 +177,7 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				files: {
-					'<%= project.img.svgSprites.build %>': ['<%= project.img.src %>/<%= project.img.svgSprites.src %>']
+					'<%= project.img.svgSprite.build %>': ['<%= project.img.src %>/<%= project.img.svgSprite.src %>']
 				},
 				options: {
 					formatting: {
@@ -189,7 +189,7 @@ module.exports = function(grunt) {
 			},
 			build: {
 				files: {
-					'<%= project.img.svgSprites.build %>': ['<%= project.img.src %>/<%= project.img.svgSprites.src %>']
+					'<%= project.img.svgSprite.build %>': ['<%= project.img.src %>/<%= project.img.svgSprite.src %>']
 				}
 			}
 		},
@@ -297,11 +297,11 @@ module.exports = function(grunt) {
 				tasks: ['postcss:default', 'bsReload:css'],
 			},
 			img: {
-				files: ['<%= project.img.src %>/<%= project.img.allExtensions %>', '!<%= project.img.src %>/<%= project.img.svgSprites.src %>'],
+				files: ['<%= project.img.src %>/<%= project.img.allExtensions %>', '!<%= project.img.src %>/<%= project.img.svgSprite.src %>'],
 				tasks: ['newer:copy:images', 'bsReload:all']
 			},
 			svgSprite: {
-				files: ['<%= project.img.src %>/<%= project.img.svgSprites.src %>'],
+				files: ['<%= project.img.src %>/<%= project.img.svgSprite.src %>'],
 				tasks: ['svgstore:dev', 'bsReload:all']
 			},
 			jslibs: {

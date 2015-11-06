@@ -25,7 +25,7 @@ All files for production are compiled with [Grunt]. CSS compiled with [PostCSS].
 
 * dev root — HTML.
 * `img` — images.
-	* `img/svg-sprites` — svg for svg sprite.
+	* `img/svg-sprite` — SVGs for SVG-sprite.
 	* `img/temp` — temporary images. They don't go to production and for demonstration purpose only.
 * `js` — JavaScript.
 	* `js/libs` — JavaScript libraries and plugins, that can't be installed via npm.

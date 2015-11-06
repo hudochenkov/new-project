@@ -5,4 +5,5 @@ build
 # Dev folder
 node_modules
 dev/img/*
+!dev/img/svg-sprite/.gitkeep
 !dev/img/.gitkeep
