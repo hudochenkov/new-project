@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 					require('postcss-simple-vars')(),
 					require('postcss-property-lookup')(),
 					require('postcss-calc')(),
-					require('postcss-color-function')(),
+					require('postcss-hexrgba')(),
 					require('autoprefixer')({
 						browsers: ['last 4 versions', '> 1%', 'Android >= 4', 'iOS >= 7']
 					})

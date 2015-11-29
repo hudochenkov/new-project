@@ -24,7 +24,7 @@
     "grunt-svgstore": "^0.5.0",
     "jit-grunt": "^0.9.1",
     "postcss-calc": "^5.0.0",
-    "postcss-color-function": "^2.0.0",
+    "postcss-hexrgba": "^0.2.0",
     "postcss-import": "^7.1.0",
     "postcss-mixins": "^2.1.0",
     "postcss-nested": "^1.0.0",
