@@ -68,6 +68,7 @@ module.exports = function(grunt) {
 							mergeLonghand: true,
 							mergeRules: false,
 							minifyFontValues: true,
+							minifyGradients: true,
 							minifySelectors: true,
 							normalizeCharset: true,
 							normalizeUrl: false,
