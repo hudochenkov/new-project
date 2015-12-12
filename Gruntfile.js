@@ -34,8 +34,14 @@ module.exports = function(grunt) {
 					require('postcss-nested')(),
 					require('postcss-simple-vars')(),
 					require('postcss-property-lookup')(),
+					require('postcss-assets')({
+						basePath: 'dev'
+					}),
 					require('postcss-calc')(),
 					require('postcss-hexrgba')(),
+					require('postcss-custom-media')(),
+					require('postcss-media-minmax')(),
+					require('lost')(),
 					require('autoprefixer')({
 						browsers: ['last 2 versions', '> 1%', 'Android >= 4', 'iOS >= 8']
 					})

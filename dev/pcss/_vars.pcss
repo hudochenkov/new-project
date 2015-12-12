@@ -1,2 +1,8 @@
 $default-font: Helvetica, Arial, sans-serif;
 $default-color: #000;
+
+@custom-media --palm (width < 768px);
+@custom-media --not-palm (768px <= width);
+@custom-media --lap (768px <= width <= 1024px);
+@custom-media --portable (width <= 1024px);
+@custom-media --desk (1024px < width);
