@@ -113,7 +113,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: '<%= project.img.src %>',
-						src: ['**/**.*'],
+						src: ['<%= project.img.allExtensions %>', '!<%= project.img.svgSprite.src %>'],
 						dest: '<%= project.img.build %>'
 					}
 				]
@@ -156,22 +156,6 @@ module.exports = function(grunt) {
 		jscs: {
 			default: {
 				src: ['<%= project.js.src %>/scripts.js', 'Gruntfile.js']
-			}
-		},
-
-		imagemin: {
-			default: {
-				options: {
-					optimizationLevel: 6
-				},
-				files: [
-					{
-						expand: true,
-						cwd: '<%= project.img.src %>/',
-						src: ['<%= project.img.allExtensions %>', '!<%= project.img.svgSprite.src %>'],
-						dest: '<%= project.img.build %>'
-					}
-				]
 			}
 		},
 
@@ -334,7 +318,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['newer:copy', 'svgstore:dev', 'concat:jslibs', 'postcss:default', 'browserSync', 'watch']);
 	// grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
 	grunt.registerTask('test', ['jscs']);
-	grunt.registerTask('build', ['clean', 'copy:js', 'copy:html', 'imagemin', 'svgstore:build', 'concat:jslibs', 'postcss:default', 'postcss:minify', 'usebanner']);
+	grunt.registerTask('build', ['clean', 'copy', 'svgstore:build', 'concat:jslibs', 'postcss:default', 'postcss:minify', 'usebanner']);
 
 	// Deploy
 	grunt.registerTask('deploy', ['ftp-deploy', 'showURL']);
