@@ -37,6 +37,9 @@ module.exports = function(grunt) {
 					require('postcss-assets')({
 						basePath: 'dev'
 					}),
+					require('postcss-inline-svg')({
+						path: 'dev'
+					}),
 					require('postcss-calc')(),
 					require('postcss-hexrgba')(),
 					require('postcss-custom-media')(),
