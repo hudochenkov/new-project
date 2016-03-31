@@ -43,7 +43,7 @@ Generate _production_ (minified and optimized) version:
 
 ## Other Grunt-tasks
 
-**test** — check JavaScript code style in scripts.js and Gruntfile.js.
+**lint** — check code style in stylesheets and in JavaScript.
 
 **compress** — make .zip:
 

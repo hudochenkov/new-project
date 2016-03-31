@@ -5,6 +5,9 @@
   "repository": "hudochenkov/new-project",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "test": "grunt lint"
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.5",
     "cssnano": "^3.5.2",
@@ -33,7 +36,9 @@
     "postcss-mixins": "^4.0.1",
     "postcss-nested": "^1.0.0",
     "postcss-property-lookup": "^1.2.1",
-    "postcss-simple-vars": "^1.2.0"
+    "postcss-simple-vars": "^1.2.0",
+    "stylelint": "^5.2.1",
+    "stylelint-value-shorthand": "^1.0.0"
   },
   "dependencies": {
     "jquery": "^2.2.2"

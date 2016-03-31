@@ -83,6 +83,16 @@ module.exports = function(grunt) {
 					]
 				},
 				src: '<%= project.css.build %>'
+			},
+			lint: {
+				options: {
+					map: false,
+					writeDest: false,
+					processors: [
+						require('stylelint')()
+					]
+				},
+				src: '<%= project.css.dir %>/*.pcss'
 			}
 		},
 
@@ -320,7 +330,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['newer:copy', 'svgstore:dev', 'concat:jslibs', 'postcss:default', 'browserSync', 'watch']);
 	// grunt.registerTask('debug', ['sass:debug', 'postcss:debug', 'browserSync', 'watch']);
-	grunt.registerTask('test', ['jscs']);
+	grunt.registerTask('lint', ['postcss:lint', 'jscs']);
 	grunt.registerTask('build', ['clean', 'copy', 'svgstore:build', 'concat:jslibs', 'postcss:default', 'postcss:minify', 'usebanner']);
 
 	// Deploy
