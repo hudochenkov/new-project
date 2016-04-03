@@ -1,19 +1,15 @@
 # How to work
 
-All files for production are compiled with [Grunt]. CSS compiled with [PostCSS]. JavaScript libs and plugins are concatenated to the single file. Images are optimized and SVG compiled to SVG-sprite. HTML just copied.
+All files for production are compiled with [Gulp]. CSS compiled with [PostCSS]. JavaScript libs and plugins are concatenated to the single file. Images are optimized. HTML just copied.
 
 ## Setup
 
 1. Install [Node.js].
-2. Install [Grunt] CLI:
-
-		$ npm install -g grunt-cli
-
-3. Install development modules:
+2. Install development modules:
 
 		$ npm install
 
-4. Run `grunt build`.
+3. Run `npm run gulp build`.
 
 ## Folders structure
 
@@ -25,7 +21,6 @@ All files for production are compiled with [Grunt]. CSS compiled with [PostCSS].
 
 * dev root — HTML.
 * `img` — images.
-	* `img/svg-sprite` — SVGs for SVG-sprite.
 	* `img/temp` — temporary images. They don't go to production and for demonstration purpose only.
 * `js` — JavaScript.
 	* `js/libs` — JavaScript libraries and plugins, that can't be installed via npm.
@@ -35,24 +30,18 @@ All files for production are compiled with [Grunt]. CSS compiled with [PostCSS].
 
 Start watching service which generates _dev_ version on each source file change, also this start local webserver with autoreload:
 
-	$ grunt
+	$ npm run gulp
 
 Generate _production_ (minified and optimized) version:
 
-	$ grunt build
+	$ npm run gulp build
 
 ## Other Grunt-tasks
 
-**lint** — check code style in stylesheets and in JavaScript.
-
-**compress** — make .zip:
-
-* **all** — sources and compiled files.
-* **markup** — only compiled
-* **source** — only sources
+**lint** — check code style in stylesheets.
 
 **deploy** — upload files to the server.
 
-[Grunt]: http://gruntjs.com/
+[Gulp]: https://github.com/gulpjs/gulp/tree/4.0
 [PostCSS]: https://github.com/postcss/postcss/
 [Node.js]: https://nodejs.org/
