@@ -48,6 +48,9 @@
 		}],
 
 		"declaration-block-no-duplicate-properties": true,
+		"declaration-block-no-ignored-properties": [true, {
+			"severity": "warning"
+		}],
 		"declaration-block-no-shorthand-property-overrides": true,
 		"declaration-block-semicolon-newline-after": "always",
 		"declaration-block-semicolon-newline-before": "never-multi-line",
