@@ -110,7 +110,8 @@ gulp.task('styles:lint', function() {
 		.pipe(postcss([
 			stylelint(),
 			reporter({
-				clearMessages: true
+				clearMessages: true,
+				throwError: true
 			})
 		]));
 });
