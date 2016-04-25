@@ -10,7 +10,8 @@ var concat = require('gulp-concat');
 var header = require('gulp-header');
 var cssnano = require('cssnano');
 var stylelint = require('stylelint');
-var reporter = require("postcss-reporter");
+var reporter = require('postcss-reporter');
+var eslint = require('gulp-eslint');
 var fs = require('fs');
 
 var project = {
@@ -38,7 +39,7 @@ var project = {
 
 var pkg = require('./package.json');
 
-gulp.task('clean', function() {
+gulp.task('clean', function () {
 	return del([project.build + '/**/*'], {
 		dot: true
 	});
@@ -66,7 +67,7 @@ var processors = [
 	})
 ];
 
-gulp.task('styles:default', function() {
+gulp.task('styles:default', function () {
 	return gulp.src(project.css.src)
 		.pipe(plumber())
 		.pipe(postcss(processors))
@@ -75,7 +76,7 @@ gulp.task('styles:default', function() {
 		.pipe(browserSync.stream());
 });
 
-gulp.task('styles:minify', function() {
+gulp.task('styles:minify', function () {
 	return gulp.src(project.build + '/' + project.css.build)
 		.pipe(plumber())
 		.pipe(postcss([
@@ -105,7 +106,7 @@ gulp.task('styles:minify', function() {
 		.pipe(gulp.dest(project.build));
 });
 
-gulp.task('styles:lint', function() {
+gulp.task('styles:lint', function () {
 	return gulp.src(project.css.dir + '*.pcss')
 		.pipe(postcss([
 			stylelint(),
@@ -123,27 +124,34 @@ gulp.task('styles',
 	)
 );
 
-gulp.task('copy:images', function() {
+gulp.task('js:lint', function () {
+	return gulp.src([project.js.src + '/*.js', './gulpfile.js'])
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(eslint.failAfterError());
+});
+
+gulp.task('copy:images', function () {
 	return gulp.src(
-			[
-				project.img.src + '/' + project.img.allExtensions,
-				'!' + project.img.src + '/' + project.img.svgSprite.src
-			],
-			{
-				since: gulp.lastRun('copy:images')
-			}
-		)
+		[
+			project.img.src + '/' + project.img.allExtensions,
+			'!' + project.img.src + '/' + project.img.svgSprite.src
+		],
+		{
+			since: gulp.lastRun('copy:images')
+		}
+	)
 		.pipe(gulp.dest(project.img.build))
 		.pipe(browserSync.stream());
 });
 
-gulp.task('copy:html', function() {
+gulp.task('copy:html', function () {
 	return gulp.src(project.src + '/*.html', { since: gulp.lastRun('copy:html') })
 		.pipe(gulp.dest(project.build))
 		.pipe(browserSync.stream());
 });
 
-gulp.task('copy:js', function() {
+gulp.task('copy:js', function () {
 	return gulp.src(project.js.src + '/*.js', { since: gulp.lastRun('copy:html') })
 		.pipe(gulp.dest(project.js.build))
 		.pipe(browserSync.stream());
@@ -157,16 +165,16 @@ gulp.task('copy',
 	)
 );
 
-gulp.task('concat', function() {
+gulp.task('concat', function () {
 	return gulp.src([
-			'node_modules/jquery/dist/jquery.min.js',
-			project.js.src + '/libs/*.js'
-		])
+		'node_modules/jquery/dist/jquery.min.js',
+		project.js.src + '/libs/*.js'
+	])
 		.pipe(concat('libs.js'))
 		.pipe(gulp.dest(project.js.build));
 });
 
-gulp.task('banner', function() {
+gulp.task('banner', function () {
 	return gulp.src(project.build + '/' + project.css.build)
 		.pipe(header(
 			'/*\n' +
@@ -174,18 +182,20 @@ gulp.task('banner', function() {
 			'Version:    <%= date %>\n' +
 			'-----------------------------------------------------------------------------*/\n',
 			{
-				date: new Date().toJSON().slice(0,10).split('-').reverse().join('.')
+				date: new Date().toJSON().slice(0, 10).split('-').reverse().join('.')
 			}
 		))
 		.pipe(gulp.dest(project.build));
 });
 
-gulp.task('upload', function() {
+gulp.task('upload', function () {
 	function isFileExist(filePath) {
 		try {
 			fs.statSync(filePath);
-		} catch(err) {
-			if (err.code == 'ENOENT') return false;
+		} catch (err) {
+			if (err.code === 'ENOENT') {
+				return false;
+			}
 		}
 
 		return true;
@@ -204,25 +214,26 @@ gulp.task('upload', function() {
 
 	var url = 'http://hudochenkov.com/show/' + pkg.name + '/';
 
-	console.log('URL: ' + url);
+	console.log('URL: ' + url); // eslint-disable-line no-console
 
 	// Copy URL to clipboard
 	var proc = require('child_process').spawn('pbcopy');
+
 	proc.stdin.write(url);
 	proc.stdin.end();
 
 	return gulp.src(
-			[project.build + '/**'],
-			{
-				base: './' + project.build,
-				buffer: false
-			}
-		)
+		[project.build + '/**'],
+		{
+			base: './' + project.build,
+			buffer: false
+		}
+	)
 		.pipe(connection.newer('/show/' + pkg.name))
 		.pipe(connection.dest('/show/' + pkg.name));
 });
 
-gulp.task('server', function() {
+gulp.task('server', function () {
 	browserSync.init({
 		server: {
 			baseDir: project.build
@@ -233,7 +244,7 @@ gulp.task('server', function() {
 	});
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
 	gulp.watch([
 		project.css.dir + '/*.pcss'
 	], gulp.series('styles:default'));
@@ -287,7 +298,8 @@ gulp.task('build',
 
 gulp.task('lint',
 	gulp.parallel(
-		'styles:lint'
+		'styles:lint',
+		'js:lint'
 	)
 );
 
