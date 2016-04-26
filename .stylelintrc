@@ -29,6 +29,10 @@
 		"string-no-newline": true,
 		"string-quotes": "double",
 
+		"unit-case": "lower",
+		"unit-no-unknown": true,
+
+		"value-keyword-case": "lower",
 		"value-no-vendor-prefix": true,
 
 		"value-list-comma-newline-after": "always-multi-line",
@@ -36,6 +40,9 @@
 		"value-list-comma-space-after": "always-single-line",
 		"value-list-comma-space-before": "never",
 
+		"shorthand-property-no-redundant-values": true,
+
+		"property-case": "lower",
 		"property-no-vendor-prefix": true,
 
 		"declaration-bang-space-after": "never",
@@ -47,7 +54,9 @@
 			"severity": "warning"
 		}],
 
-		"declaration-block-no-duplicate-properties": true,
+		"declaration-block-no-duplicate-properties": [true, {
+			"ignore": ["consecutive-duplicates"]
+		}],
 		"declaration-block-no-ignored-properties": [true, {
 			"severity": "warning"
 		}],
@@ -64,11 +73,15 @@
 		"block-opening-brace-newline-after": "always",
 		"block-opening-brace-space-before": "always",
 
+		"selector-attribute-brackets-space-inside": "never",
 		"selector-combinator-space-after": "always",
 		"selector-combinator-space-before": "always",
 		"selector-no-id": true,
 		"selector-no-universal": true,
 		"selector-no-vendor-prefix": true,
+		"selector-pseudo-class-case": "lower",
+		"selector-pseudo-class-parentheses-space-inside": "never",
+		"selector-pseudo-element-case": "lower",
 		"selector-type-case": "lower",
 
 		"selector-list-comma-newline-after": "always",
@@ -95,6 +108,7 @@
 		"media-query-list-comma-space-after": "always-single-line",
 		"media-query-list-comma-space-before": "never",
 
+		"at-rule-name-case": "lower",
 		"at-rule-no-vendor-prefix": true,
 		"at-rule-semicolon-newline-after": "always",
 
