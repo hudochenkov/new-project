@@ -36,7 +36,7 @@ Generate _production_ (minified and optimized) version:
 
 	$ npm run gulp build
 
-## Other Grunt-tasks
+## Other Gulp-tasks
 
 **lint** — check code style in stylesheets.
 
