@@ -38,7 +38,7 @@ Generate _production_ (minified and optimized) version:
 
 ## Other Gulp-tasks
 
-**lint** — check code style in stylesheets.
+**lint** — check code style in stylesheets and JavaScipt files.
 
 **deploy** — upload files to the server.
 
