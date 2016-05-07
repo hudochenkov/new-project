@@ -156,7 +156,7 @@ gulp.task('copy:html', function () {
 });
 
 gulp.task('copy:js', function () {
-	return gulp.src(project.js.src + '/*.js', { since: gulp.lastRun('copy:html') })
+	return gulp.src(project.js.src + '/*.js', { since: gulp.lastRun('copy:js') })
 		.pipe(gulp.dest(project.js.build))
 		.pipe(browserSync.stream());
 });
