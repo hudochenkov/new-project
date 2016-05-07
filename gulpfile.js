@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var plumber = require('gulp-plumber');
 var postcss = require('gulp-postcss');
 var browserSync = require('browser-sync');
 var del = require('del');
@@ -39,6 +38,11 @@ var project = {
 
 var pkg = require('./package.json');
 
+function handleError(err) {
+	console.log(err.toString()); // eslint-disable-line no-console
+	this.emit('end');
+}
+
 gulp.task('clean', function () {
 	return del([project.build + '/**/*'], {
 		dot: true
@@ -69,8 +73,8 @@ var processors = [
 
 gulp.task('styles:default', function () {
 	return gulp.src(project.css.src)
-		.pipe(plumber())
 		.pipe(postcss(processors))
+		.on('error', handleError)
 		.pipe(rename(project.css.build))
 		.pipe(gulp.dest(project.build))
 		.pipe(browserSync.stream());
@@ -78,7 +82,6 @@ gulp.task('styles:default', function () {
 
 gulp.task('styles:minify', function () {
 	return gulp.src(project.build + '/' + project.css.build)
-		.pipe(plumber())
 		.pipe(postcss([
 			cssnano({
 				autoprefixer: false,
@@ -103,6 +106,7 @@ gulp.task('styles:minify', function () {
 				zindex: true
 			})
 		]))
+		.on('error', handleError)
 		.pipe(gulp.dest(project.build));
 });
 
