@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "gulp",
     "test": "gulp lint",
     "gulp": "./node_modules/.bin/gulp"
   },
