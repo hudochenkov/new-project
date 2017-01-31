@@ -18,11 +18,11 @@ var project = {
 	css: {
 		src: 'dev/pcss/main.pcss',
 		build: 'main.css',
-		dir: 'dev/pcss/'
+		dir: 'dev/pcss/',
 	},
 	js: {
 		src: 'dev/js',
-		build: 'build/js'
+		build: 'build/js',
 	},
 	img: {
 		src: 'dev/img',
@@ -30,9 +30,9 @@ var project = {
 		allExtensions: '**/*.{png,jpg,gif,svg}',
 		svgSprite: {
 			src: 'svg-sprite/*.svg',
-			build: 'build/img/sprite.svg'
-		}
-	}
+			build: 'build/img/sprite.svg',
+		},
+	},
 };
 
 var pkg = require('./package.json');
@@ -44,7 +44,7 @@ function handleError(err) {
 
 gulp.task('clean', function () {
 	return del([project.build + '/**/*'], {
-		dot: true
+		dot: true,
 	});
 });
 
@@ -55,10 +55,10 @@ var processors = [
 	require('postcss-simple-vars')(),
 	require('postcss-property-lookup')(),
 	require('postcss-assets')({
-		basePath: 'dev'
+		basePath: 'dev',
 	}),
 	require('postcss-inline-svg')({
-		path: 'dev'
+		path: 'dev',
 	}),
 	require('postcss-calc')(),
 	require('postcss-hexrgba')(),
@@ -66,8 +66,8 @@ var processors = [
 	require('postcss-media-minmax')(),
 	require('lost')(),
 	require('autoprefixer')({
-		browsers: ['last 2 versions', '> 1%', 'Android >= 4', 'iOS >= 8']
-	})
+		browsers: ['last 2 versions', '> 1%', 'Android >= 4', 'iOS >= 8'],
+	}),
 ];
 
 gulp.task('styles:default', function () {
@@ -112,8 +112,8 @@ gulp.task('styles:minify', function () {
 				reduceTimingFunctions: true,
 				reduceTransforms: true,
 				uniqueSelectors: true,
-				zindex: false
-			})
+				zindex: false,
+			}),
 		]))
 		.on('error', handleError)
 		.pipe(gulp.dest(project.build));
@@ -150,10 +150,10 @@ gulp.task('copy:images', function () {
 	return gulp.src(
 		[
 			project.img.src + '/' + project.img.allExtensions,
-			'!' + project.img.src + '/' + project.img.svgSprite.src
+			'!' + project.img.src + '/' + project.img.svgSprite.src,
 		],
 		{
-			since: gulp.lastRun('copy:images')
+			since: gulp.lastRun('copy:images'),
 		}
 	)
 		.pipe(gulp.dest(project.img.build))
@@ -183,7 +183,7 @@ gulp.task('copy',
 gulp.task('concat', function () {
 	return gulp.src([
 		'node_modules/jquery/dist/jquery.min.js',
-		project.js.src + '/libs/*.js'
+		project.js.src + '/libs/*.js',
 	])
 		.pipe(concat('libs.js'))
 		.pipe(gulp.dest(project.js.build));
@@ -197,7 +197,7 @@ gulp.task('banner', function () {
 			'Version:    <%= date %>\n' +
 			'-----------------------------------------------------------------------------*/\n',
 			{
-				date: new Date().toJSON().slice(0, 10).split('-').reverse().join('.')
+				date: new Date().toJSON().slice(0, 10).split('-').reverse().join('.'),
 			}
 		))
 		.pipe(gulp.dest(project.build));
@@ -224,7 +224,7 @@ gulp.task('upload', function () {
 		user: secret.username,
 		password: secret.password,
 		parallel: 8,
-		log: gutil.log
+		log: gutil.log,
 	});
 
 	var url = 'http://hudochenkov.com/show/' + pkg.name + '/';
@@ -241,7 +241,7 @@ gulp.task('upload', function () {
 		[project.build + '/**'],
 		{
 			base: './' + project.build,
-			buffer: false
+			buffer: false,
 		}
 	)
 		.pipe(connection.newer('/show/' + pkg.name))
@@ -251,34 +251,34 @@ gulp.task('upload', function () {
 gulp.task('server', function () {
 	browserSync.init({
 		server: {
-			baseDir: project.build
+			baseDir: project.build,
 		},
 		notify: false,
 		online: false,
-		ghostMode: false
+		ghostMode: false,
 	});
 });
 
 gulp.task('watch', function () {
 	gulp.watch([
-		project.css.dir + '/*.pcss'
+		project.css.dir + '/*.pcss',
 	], gulp.series('styles:default'));
 
 	gulp.watch([
 		project.img.src + '/' + project.img.allExtensions,
-		'!' + project.img.src + '/' + project.img.svgSprite.src
+		'!' + project.img.src + '/' + project.img.svgSprite.src,
 	], gulp.series('copy:images'));
 
 	gulp.watch([
-		project.js.src + '/libs/*.js'
+		project.js.src + '/libs/*.js',
 	], gulp.series('concat'));
 
 	gulp.watch([
-		project.js.src + '/*.js'
+		project.js.src + '/*.js',
 	], gulp.series('copy:js'));
 
 	gulp.watch([
-		project.src + '/*.html'
+		project.src + '/*.html',
 	], gulp.series('copy:html'));
 });
 
