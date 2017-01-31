@@ -11,34 +11,34 @@
     "gulp": "./node_modules/.bin/gulp"
   },
   "devDependencies": {
-    "autoprefixer": "^6.4.1",
-    "browser-sync": "^2.15.0",
-    "cssnano": "^3.7.4",
+    "autoprefixer": "^6.7.1",
+    "browser-sync": "^2.18.7",
+    "cssnano": "^3.10.0",
     "del": "^2.2.2",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-concat": "^2.6.0",
+    "gulp-concat": "^2.6.1",
     "gulp-eslint": "^3.0.1",
     "gulp-header": "^1.8.8",
-    "gulp-postcss": "^6.2.0",
+    "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.7",
-    "lost": "^7.1.0",
+    "gulp-util": "^3.0.8",
+    "lost": "^8.0.0",
     "postcss-assets": "^4.1.0",
     "postcss-calc": "^5.3.1",
     "postcss-custom-media": "^5.0.1",
-    "postcss-hexrgba": "^0.2.0",
-    "postcss-import": "^8.1.2",
-    "postcss-inline-svg": "^2.1.2",
+    "postcss-hexrgba": "^0.2.1",
+    "postcss-import": "^9.1.0",
+    "postcss-inline-svg": "^2.3.0",
     "postcss-media-minmax": "^2.1.1",
-    "postcss-mixins": "^5.2.0",
+    "postcss-mixins": "^5.4.1",
     "postcss-nested": "^1.0.0",
     "postcss-property-lookup": "^1.2.1",
-    "postcss-reporter": "^1.4.1",
+    "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
-    "stylelint": "^7.2.0",
+    "stylelint": "^7.7.1",
     "vinyl-ftp": "^0.5.0"
   },
   "dependencies": {
-    "jquery": "^2.2.4"
+    "jquery": "^3.1.1"
   }
 }
