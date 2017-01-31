@@ -21,6 +21,7 @@
     "gulp-header": "^1.8.8",
     "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
+    "gulp-stylelint": "^3.7.0",
     "gulp-util": "^3.0.8",
     "lost": "^8.0.0",
     "postcss-assets": "^4.1.0",
@@ -33,9 +34,9 @@
     "postcss-mixins": "^5.4.1",
     "postcss-nested": "^1.0.0",
     "postcss-property-lookup": "^1.2.1",
-    "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
-    "stylelint": "^7.7.1",
+    "stylelint-order": "^0.2.2",
+    "stylelint-scss": "^1.4.1",
     "vinyl-ftp": "^0.5.0"
   },
   "dependencies": {

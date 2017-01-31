@@ -8,8 +8,7 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var header = require('gulp-header');
 var cssnano = require('cssnano');
-var stylelint = require('stylelint');
-var reporter = require('postcss-reporter');
+var stylelint = require('gulp-stylelint');
 var eslint = require('gulp-eslint');
 var fs = require('fs');
 
@@ -122,13 +121,15 @@ gulp.task('styles:minify', function () {
 
 gulp.task('styles:lint', function () {
 	return gulp.src(project.css.dir + '*.pcss')
-		.pipe(postcss([
-			stylelint(),
-			reporter({
-				clearMessages: true,
-				throwError: true
-			})
-		]));
+		.pipe(stylelint({
+			failAfterError: false,
+			reporters: [
+				{
+					formatter: 'string',
+					console: true,
+				},
+			],
+		}));
 });
 
 gulp.task('styles',
