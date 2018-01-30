@@ -28,10 +28,6 @@ var project = {
 		src: 'dev/img',
 		build: 'build/img',
 		allExtensions: '**/*.{png,jpg,gif,svg}',
-		svgSprite: {
-			src: 'svg-sprite/*.svg',
-			build: 'build/img/sprite.svg',
-		},
 	},
 };
 
@@ -149,8 +145,7 @@ gulp.task('js:lint', function () {
 gulp.task('copy:images', function () {
 	return gulp.src(
 		[
-			project.img.src + '/' + project.img.allExtensions,
-			'!' + project.img.src + '/' + project.img.svgSprite.src,
+			project.img.src + '/' + project.img.allExtensions
 		],
 		{
 			since: gulp.lastRun('copy:images'),
@@ -265,8 +260,7 @@ gulp.task('watch', function () {
 	], gulp.series('styles:default'));
 
 	gulp.watch([
-		project.img.src + '/' + project.img.allExtensions,
-		'!' + project.img.src + '/' + project.img.svgSprite.src,
+		project.img.src + '/' + project.img.allExtensions
 	], gulp.series('copy:images'));
 
 	gulp.watch([
