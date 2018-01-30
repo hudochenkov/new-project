@@ -3,7 +3,7 @@ var postcss = require('gulp-postcss');
 var browserSync = require('browser-sync');
 var del = require('del');
 var ftp = require('vinyl-ftp');
-var gutil = require('gulp-util');
+var fancyLog = require('fancy-log');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var header = require('gulp-header');
@@ -182,7 +182,7 @@ gulp.task('copy',
 
 gulp.task('concat', function () {
 	return gulp.src([
-		'node_modules/jquery/dist/jquery.min.js',
+		// 'node_modules/jquery/dist/jquery.min.js',
 		project.js.src + '/libs/*.js',
 	])
 		.pipe(concat('libs.js'))
@@ -224,7 +224,7 @@ gulp.task('upload', function () {
 		user: secret.username,
 		password: secret.password,
 		parallel: 8,
-		log: gutil.log,
+		log: fancyLog,
 	});
 
 	var url = 'http://hudochenkov.com/show/' + pkg.name + '/';

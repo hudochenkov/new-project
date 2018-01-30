@@ -9,8 +9,6 @@ All files for production are compiled with [Gulp]. CSS compiled with [PostCSS]. 
 
 		$ npm install
 
-3. Run `npm run gulp build`.
-
 ## Folders structure
 
 `root` — configs and dependencies.
@@ -30,18 +28,18 @@ All files for production are compiled with [Gulp]. CSS compiled with [PostCSS]. 
 
 Start watching service which generates _dev_ version on each source file change, also this start local webserver with autoreload:
 
-	$ npm run gulp
+	$ npm start
 
 Generate _production_ (minified and optimized) version:
 
-	$ npm run gulp build
+	$ npm run build
 
 ## Other Gulp-tasks
 
-**lint** — check code style in stylesheets and JavaScipt files.
+**npm run lint** — check code style in stylesheets and JavaScipt files.
 
-**deploy** — upload files to the server.
+**npm run deploy** — upload files to the server.
 
-[Gulp]: https://github.com/gulpjs/gulp/tree/4.0
+[Gulp]: https://github.com/gulpjs/gulp/
 [PostCSS]: https://github.com/postcss/postcss/
 [Node.js]: https://nodejs.org/
