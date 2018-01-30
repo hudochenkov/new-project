@@ -39,7 +39,7 @@ function handleError(err) {
 }
 
 gulp.task('clean', function () {
-	return del([project.build + '/**/*'], {
+	return del([`${project.build}/**/*`], {
 		dot: true,
 	});
 });
@@ -76,7 +76,7 @@ gulp.task('styles:default', function () {
 });
 
 gulp.task('styles:minify', function () {
-	return gulp.src(project.build + '/' + project.css.build)
+	return gulp.src(`${project.build}/${project.css.build}`)
 		.pipe(postcss([
 			cssnano({
 				autoprefixer: false,
@@ -116,7 +116,7 @@ gulp.task('styles:minify', function () {
 });
 
 gulp.task('styles:lint', function () {
-	return gulp.src(project.css.dir + '*.pcss')
+	return gulp.src(`${project.css.dir}*.pcss`)
 		.pipe(stylelint({
 			failAfterError: false,
 			reporters: [
@@ -136,7 +136,7 @@ gulp.task('styles',
 );
 
 gulp.task('js:lint', function () {
-	return gulp.src([project.js.src + '/*.js', './gulpfile.js'])
+	return gulp.src([`${project.js.src}/*.js`, './gulpfile.js'])
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(eslint.failAfterError());
@@ -145,7 +145,7 @@ gulp.task('js:lint', function () {
 gulp.task('copy:images', function () {
 	return gulp.src(
 		[
-			project.img.src + '/' + project.img.allExtensions
+			`${project.img.src}/${project.img.allExtensions}`,
 		],
 		{
 			since: gulp.lastRun('copy:images'),
@@ -156,13 +156,13 @@ gulp.task('copy:images', function () {
 });
 
 gulp.task('copy:html', function () {
-	return gulp.src(project.src + '/*.html', { since: gulp.lastRun('copy:html') })
+	return gulp.src(`${project.src}/*.html`, { since: gulp.lastRun('copy:html') })
 		.pipe(gulp.dest(project.build))
 		.pipe(browserSync.stream());
 });
 
 gulp.task('copy:js', function () {
-	return gulp.src(project.js.src + '/*.js', { since: gulp.lastRun('copy:js') })
+	return gulp.src(`${project.js.src}/*.js`, { since: gulp.lastRun('copy:js') })
 		.pipe(gulp.dest(project.js.build))
 		.pipe(browserSync.stream());
 });
@@ -178,14 +178,14 @@ gulp.task('copy',
 gulp.task('concat', function () {
 	return gulp.src([
 		// 'node_modules/jquery/dist/jquery.min.js',
-		project.js.src + '/libs/*.js',
+		`${project.js.src}/libs/*.js`,
 	])
 		.pipe(concat('libs.js'))
 		.pipe(gulp.dest(project.js.build));
 });
 
 gulp.task('banner', function () {
-	return gulp.src(project.build + '/' + project.css.build)
+	return gulp.src(`${project.build}/${project.css.build}`)
 		.pipe(header(
 			'/*\n' +
 			'Author:     Aleks Hudochenkov (hudochenkov.com)\n' +
@@ -211,7 +211,7 @@ gulp.task('upload', function () {
 		return true;
 	}
 
-	var secret = isFileExist(process.env.HOME + '/.gulp-ftp.json') ? require(process.env.HOME + '/.gulp-ftp.json') : {};
+	var secret = isFileExist(`${process.env.HOME}/.gulp-ftp.json`) ? require(`${process.env.HOME}/.gulp-ftp.json`) : {};
 
 	var connection = ftp.create({
 		host: secret.host,
@@ -222,9 +222,9 @@ gulp.task('upload', function () {
 		log: fancyLog,
 	});
 
-	var url = 'http://hudochenkov.com/show/' + pkg.name + '/';
+	var url = `http://hudochenkov.com/show/${pkg.name}/`;
 
-	console.log('URL: ' + url); // eslint-disable-line no-console
+	console.log(`URL: ${url}`); // eslint-disable-line no-console
 
 	// Copy URL to clipboard
 	var proc = require('child_process').spawn('pbcopy');
@@ -233,14 +233,14 @@ gulp.task('upload', function () {
 	proc.stdin.end();
 
 	return gulp.src(
-		[project.build + '/**'],
+		[`${project.build}/**`],
 		{
-			base: './' + project.build,
+			base: `./${project.build}`,
 			buffer: false,
 		}
 	)
-		.pipe(connection.newer('/show/' + pkg.name))
-		.pipe(connection.dest('/show/' + pkg.name));
+		.pipe(connection.newer(`/show/${pkg.name}`))
+		.pipe(connection.dest(`/show/${pkg.name}`));
 });
 
 gulp.task('server', function () {
@@ -256,23 +256,23 @@ gulp.task('server', function () {
 
 gulp.task('watch', function () {
 	gulp.watch([
-		project.css.dir + '/*.pcss',
+		`${project.css.dir}/*.pcss`,
 	], gulp.series('styles:default'));
 
 	gulp.watch([
-		project.img.src + '/' + project.img.allExtensions
+		`${project.img.src}/${project.img.allExtensions}`,
 	], gulp.series('copy:images'));
 
 	gulp.watch([
-		project.js.src + '/libs/*.js',
+		`${project.js.src}/libs/*.js`,
 	], gulp.series('concat'));
 
 	gulp.watch([
-		project.js.src + '/*.js',
+		`${project.js.src}/*.js`,
 	], gulp.series('copy:js'));
 
 	gulp.watch([
-		project.src + '/*.html',
+		`${project.src}/*.html`,
 	], gulp.series('copy:html'));
 });
 
