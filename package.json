@@ -8,7 +8,6 @@
   "scripts": {
     "build": "gulp build",
     "deploy": "gulp deploy",
-    "postinstall": "npm run build",
     "start": "gulp",
     "test": "gulp lint"
   },
