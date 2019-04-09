@@ -62,7 +62,13 @@ var processors = [
 	require('postcss-media-minmax')(),
 	require('lost')(),
 	require('autoprefixer')({
-		browsers: ['last 2 versions', '> 1%', 'Android >= 4', 'iOS >= 8'],
+		browsers: [
+			'> 0.5% and last 2 major versions',
+			'Firefox ESR',
+			'not op_mini all',
+			'not dead',
+			'not IE 11',
+		],
 	}),
 ];
 
@@ -79,36 +85,12 @@ gulp.task('styles:minify', function () {
 	return gulp.src(`${project.build}/${project.css.build}`)
 		.pipe(postcss([
 			cssnano({
-				autoprefixer: false,
-				calc: false,
-				colormin: true,
-				convertValues: false,
-				core: true,
-				discardComments: true,
-				discardDuplicates: true,
-				discardEmpty: true,
-				discardOverridden: true,
-				discardUnused: true,
-				filterOptimiser: true,
-				functionOptimiser: true,
-				mergeIdents: true,
-				mergeLonghand: true,
-				mergeRules: false,
-				minifyFontValues: true,
-				minifyGradients: true,
-				minifyParams: true,
-				minifySelectors: true,
-				normalizeCharset: true,
-				normalizeUrl: true,
-				orderedValues: false,
-				reduceBackgroundRepeat: true,
-				reduceInitial: true,
-				reduceIdents: true,
-				reducePositions: true,
-				reduceTimingFunctions: true,
-				reduceTransforms: true,
-				uniqueSelectors: true,
-				zindex: false,
+				preset: [
+				    'default',
+				    {
+				        svgo: false, // removes viewBox
+				    },
+				],
 			}),
 		]))
 		.on('error', handleError)
